@@ -1,9 +1,13 @@
-import { useEffect, useRef } from 'react'
+import { Suspense, lazy, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { HeroOrb } from '../components/HeroOrb'
 import { Reveal } from '../components/Reveal'
 import { Timeline } from '../components/Timeline'
 import { hero, homeSections, homeServices } from '../data/maixner'
+
+const HeroOrb = lazy(async () => {
+  const mod = await import('../components/HeroOrb')
+  return { default: mod.HeroOrb }
+})
 
 export function Home() {
   const heroTextRef = useRef<HTMLDivElement>(null)
@@ -37,9 +41,7 @@ export function Home() {
                   {i < hero.words.length - 1 ? ' ' : ''}
                 </span>
               ))}
-              <span className="hero-cursor" aria-hidden>
-                |
-              </span>
+            
             </h1>
             <p className="hero-subhead">{hero.subhead}</p>
             <p className="hero-lead">{hero.body}</p>
@@ -52,7 +54,9 @@ export function Home() {
               </Link>
             </div>
           </div>
-          <HeroOrb />
+          <Suspense fallback={<div className="hero-orb hero-orb--placeholder" aria-hidden />}>
+            <HeroOrb />
+          </Suspense>
         </div>
         <div className="scroll-hint">
           <span>Další sekce</span>

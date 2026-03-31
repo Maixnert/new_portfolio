@@ -37,12 +37,12 @@ export const assetPaths = {
 export const hero = {
   /** Slova pro stagger animaci — vizuálně „Jsem Tomáš. Maixner.“ + kurzor */
   words: [
-    { text: 'Jsem', delay: 0 },
-    { text: 'Tomáš.', delay: 90 },
-    { text: 'Maixner.', delay: 180 },
+    { text: 'Komplexní digitální tvorba', delay: 0 },
+    { text: 'pro značky,', delay: 90 },
+    { text: '\u00A0které chtějí víc.', delay: 180 },
   ] as const,
   subhead:
-    'Grafický design. Weby, co prodávají. Digitální marketing, který dává smysl.',
+    '  ',
   body: 'Pomáhám firmám a jednotlivcům vypadat profesionálně online — od prvního nápadu až po hotový výsledek. WordPress, Shopify i HTML na míru. Dostupný v Šumperku, Zábřehu, Olomouci i na dálku.',
   ctaPrimary: 'Ukázat práci',
   ctaSecondary: 'Napište mi',
