@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { PageBackdropWord } from '../components/PageBackdropWord'
 import { Reveal } from '../components/Reveal'
 import {
   type PortfolioCategory,
@@ -64,7 +63,6 @@ export function Work() {
 
   return (
     <div className="page-hero">
-      <PageBackdropWord word="PRÁCE" />
       <div className="page-hero__inner">
         <Reveal>
           <span className="section-kicker">Co dělám?</span>
@@ -99,47 +97,49 @@ export function Work() {
           </div>
         </Reveal>
 
-        <div className="work-grid">
-          {visible.map((item, index) => {
-            const featured = filter === 'vše' && index === 0
-            const inner = (
-              <>
-                <PortfolioTileImage src={item.image} title={item.title} />
-                <div className="work-tile__overlay" aria-hidden />
-                <div className="work-tile__arrow" aria-hidden>
-                  {item.href ? '↗' : '→'}
-                </div>
-                <div className="work-tile__bottom">
-                  <span className="work-tile__badge">{labels[item.category]}</span>
-                  <span className="work-tile__title">{item.title}</span>
-                </div>
-              </>
-            )
+        <section className="work-showcase" aria-label="Ukázky projektů">
+          <div className="work-grid">
+            {visible.map((item, index) => {
+              const featured = filter === 'vše' && index === 0
+              const inner = (
+                <>
+                  <PortfolioTileImage src={item.image} title={item.title} />
+                  <div className="work-tile__overlay" aria-hidden />
+                  <div className="work-tile__arrow" aria-hidden>
+                    {item.href ? '↗' : '→'}
+                  </div>
+                  <div className="work-tile__bottom">
+                    <span className="work-tile__badge">{labels[item.category]}</span>
+                    <span className="work-tile__title">{item.title}</span>
+                  </div>
+                </>
+              )
 
-            return (
-              <Reveal key={item.id} delayMs={index * 50}>
-                {item.href ? (
-                  <a
-                    href={item.href}
-                    className={`work-tile work-tile--link${featured ? ' work-tile--feature' : ''}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {inner}
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    className={`work-tile work-tile--button${featured ? ' work-tile--feature' : ''}`}
-                    onClick={() => setLightbox({ src: item.image, title: item.title })}
-                  >
-                    {inner}
-                  </button>
-                )}
-              </Reveal>
-            )
-          })}
-        </div>
+              return (
+                <Reveal key={item.id} delayMs={index * 50}>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className={`work-tile work-tile--link${featured ? ' work-tile--feature' : ''}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      className={`work-tile work-tile--button${featured ? ' work-tile--feature' : ''}`}
+                      onClick={() => setLightbox({ src: item.image, title: item.title })}
+                    >
+                      {inner}
+                    </button>
+                  )}
+                </Reveal>
+              )
+            })}
+          </div>
+        </section>
       </div>
 
       {lightbox && (

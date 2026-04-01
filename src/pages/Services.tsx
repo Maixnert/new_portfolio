@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { PageBackdropWord } from '../components/PageBackdropWord'
 import { Reveal } from '../components/Reveal'
 import { servicesPage } from '../data/maixner'
 
@@ -8,7 +7,6 @@ export function Services() {
 
   return (
     <div className="page-hero">
-      <PageBackdropWord word="SLUŽBY" />
       <div className="page-hero__inner">
         <Reveal>
           <span className="section-kicker">{servicesPage.kicker}</span>

@@ -43,7 +43,7 @@ export const hero = {
   ] as const,
   subhead:
     '  ',
-  body: 'Pomáhám firmám a jednotlivcům vypadat profesionálně online — od prvního nápadu až po hotový výsledek. WordPress, Shopify i HTML na míru. Dostupný v Šumperku, Zábřehu, Olomouci i na dálku.',
+  body: 'Spojujeme kreativitu s technologií, abychom budovali smysluplné řešení, která nejen ohromí, ale skutečně zlepší váš byznys. Obsah, design i strategie. Vše navržené pro reálné výsledky, růst a viditelné dopady.',
   ctaPrimary: 'Ukázat práci',
   ctaSecondary: 'Napište mi',
 }
@@ -53,43 +53,43 @@ export const homeServices = [
     tag: 'UI/UX',
     badge: 'uiux' as const,
     title: 'UI/UX Design',
-    body: 'Navrhuju prostředí, která jsou nejen hezká — ale hlavně intuitivní a funkční.',
+    body: 'Navrhujeme intuitivní uživatelská rozhraní a zážitky, které přitahují, udržují a konvertují návštěvníky na loajální zákazníky. ',
   },
   {
     tag: 'WEB',
     badge: 'web' as const,
-    title: 'Web Development',
-    body: 'Stavím weby, které se načtou rychle, vypadají skvěle a konvertují návštěvníky na zákazníky.',
+    title: 'Web/App Development',
+    body: 'Stavíme moderní weby a e-shopy na míru, které běží rychle, škálují se a perfektně fungují na všech zařízeních.',
   },
   {
     tag: 'OBSAH',
     badge: 'obsah' as const,
     title: 'Content Creation',
-    body: 'Grafika, fotografie, video, DTP — obsah, který zaujme na první pohled a drží pozornost.',
+    body: 'Tvoříme poutavý obsah grafiku, fotografie, videa a DTP materiály, který vypráví váš příběh a oslovuje cílovou skupinu.',
   },
   {
     tag: 'MARKETING',
     badge: 'marketing' as const,
     title: 'Digitální marketing',
-    body: 'Newslettery, reklamy, sociální sítě — strategie postavená na datech, ne na dojmech.',
+    body: 'Rozjíždíme kampaně přes newslettery, placené reklamy, sociální sítě a strategie, které přinášejí měřitelné výsledky více leadů, prodejů a ROI.',
   },
 ] as const
 
 export const timelineSteps = [
   {
     n: '01',
-    title: 'Poslechnu vás',
-    body: 'Řeknete mi, co potřebujete — já se zeptám na vše potřebné, abych pochopil projekt i vaše cíle.',
+    title: 'Vyslechneme vás',
+    body: 'Řeknete nám, co potřebujete. My se zeptáme na vše potřebné, abychom pochopili projekt i vaše cíle.',
   },
   {
     n: '02',
-    title: 'Navrhnu a doladíme',
-    body: 'Připravím návrh, ukážu vám ho a společně ho dotáhneme do finální podoby.',
+    title: 'Navrhneme a doladíme',
+    body: 'Připravíme návrh, ukážeme vám ho a společně ho dotáhneme do finální podoby.',
   },
   {
     n: '03',
-    title: 'Předám a jsem k dispozici',
-    body: 'Dostanete hotové soubory nebo spuštěný web. A pokud budete potřebovat pomoct dál — jsem tu.',
+    title: 'Předáme a jsme k dispozici',
+    body: 'Dostanete hotové soubory nebo spuštěný web. A pokud budete potřebovat pomoct dál, jsme tu.',
   },
 ] as const
 
@@ -105,18 +105,26 @@ export const footerTagline =
   'Freelance designer & developer · Dostupný pro nové projekty'
 
 export const about = {
-  kicker: 'Něco',
-  title: 'O mně',
+  kicker: 'Kdo jsme',
+  title: 'Partner pro digitální růst',
+  lead: 'Design, vývoj a marketing pod jednou střechou — od strategii po měřitelné výsledky.',
   cards: [
     {
-      title: 'Zkušenosti',
-      lines: ['5+ freelance', 'Práce v médiích', 'Práce v Reklamce'],
+      title: 'Tým',
+      lines: ['Design + vývoj + marketing', 'Jeden partner, jeden proces'],
     },
-    { title: 'Klienti', lines: ['30+'] },
-    { title: 'Projekty', lines: ['40+ dokončených projektů'] },
+    { title: 'Klienti', lines: ['30+ značek'] },
+    { title: 'Projekty', lines: ['40+ realizací od webu po kampaně'] },
   ],
-  body: 'Mám zkušenosti s tvorbou různých formátů. Dělal jsem videa, produktovou fotografii, grafický design a DTP. Momentálně se nejvíce soustředím na web design, web development a digitální marketing.',
-  cta: 'Kontaktujte mě',
+  body: 'Nejsme jen dodavatel. Jsme partner, který propojuje strategii, design a technologii do jednoho funkčního celku. Pomáháme firmám růst online bez chaosu, zdržení a roztříštěné komunikace mezi více týmy.',
+  bodySecondary:
+    'Každý projekt stavíme na datech, jasných cílech a reálném byznysovém dopadu. Od prvního workshopu po spuštění a následnou optimalizaci držíme stejný standard: kvalita, transparentnost a výsledky.',
+  values: [
+    'Srozumitelná komunikace bez agenturní mlhy.',
+    'Rozhodnutí podložená daty i zkušeností.',
+    'Dlouhodobá spolupráce místo jednorázového odevzdání.',
+  ],
+  cta: 'Pojďme spolupracovat',
 }
 
 export type PortfolioCategory = 'vše' | 'web' | 'design' | 'video'
@@ -208,33 +216,38 @@ export const servicesPage = {
     {
       num: '01',
       name: 'UI/UX Design',
-      body: 'Design uživatelského prostředí i zážitku je pro mě důležitá součást práce. Dělám ji i samostatně, častěji však v kombinaci s vývojem webu.',
+      body: 'Navrhujeme intuitivní uživatelská rozhraní a zážitky, které přitahují, udržují a konvertují návštěvníky na loajální zákazníky. Pomocí průzkumů, prototypů a testování zajistíme, že vaše aplikace nebo web bude nejen krásný, ale i maximálně efektivní pro růst konverzí.',
     },
     {
       num: '02',
-      name: 'Web Development',
-      body: 'Tvořím weby, které mají funkční i vizuální hodnotu. Od CMS redakčních systémů po malé microsites.',
+      name: 'Web/App Development',
+      body: 'Stavíme moderní weby a e-shopy na míru, které běží rychle, škálují se a perfektně fungují na všech zařízeních. Od frontendových frameworků po backendové systémy až po AI optimalizaci doručíme plně responzivní řešení pro dlouhodobý úspěch vašich projektů.',
     },
     {
       num: '03',
       name: 'Content Creation',
-      body: 'Dělám digitální grafiku, DTP, 3D, fotografie i video. Vše s největší pečlivostí a maximálním smyslem pro detail.',
+      body: 'Tvoříme poutavý obsah, grafiku, fotografie, videa a DTP materiály, který vypráví váš příběh a oslovuje cílovou skupinu. S důrazem na kvalitu a SEO optimalizaci produkuje materiály, jež zvyšují engagement a posilují vaši značku na všech platformách.',
     },
     {
       num: '04',
       name: 'Digitální marketing',
-      body: 'Newslettery, reklamní kampaně, sociální sítě — s tím vším vám mohu pomoci.',
+      body: 'Rozjíždíme kampaně přes newslettery, placené reklamy, sociální sítě a strategie, které přinášejí měřitelné výsledky. Více leadů, prodejů a ROI. Kombinujeme data-driven přístup s kreativními strategiemi pro dominanci ve vyhledávačích a online prostoru.',
     },
   ] as const,
 }
 
 export const contactPage = {
-  kicker: 'Pojďme se poznat',
-  title: 'Kontaktujte mě',
-  intro: '',
+  kicker: 'Kontakt',
+  title: 'Domluvme si další krok',
+  lead: 'Napište nám stručně váš záměr — ozveme se co nejdříve a projdeme možnosti spolupráce.',
+  channelsHeading: 'Rychlé spojení',
+  formHeading: 'Zpráva pro tým',
+  formIntro:
+    'Vyplňte formulář a ozveme se s návrhem dalších kroků. Pro naléhavé záležitosti použijte e-mail nebo chat níže.',
   formName: 'Jméno a příjmení',
   formEmail: 'Váš e-mail',
   formMessage: 'Vaše zpráva',
   submit: 'Odeslat zprávu',
-  sendMessage: 'Napsat zprávu',
+  sendMessage: 'Otevřít',
+  formDevNote: 'Formulář je zatím ukázkový — lze napojit na EmailJS nebo váš backend.',
 }

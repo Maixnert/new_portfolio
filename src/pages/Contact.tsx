@@ -2,6 +2,30 @@ import type { FormEvent } from 'react'
 import { Reveal } from '../components/Reveal'
 import { assetPaths, contactPage, site } from '../data/maixner'
 
+const channels = [
+  {
+    key: 'email',
+    label: 'E-mail',
+    value: site.email,
+    href: `mailto:${site.email}`,
+    external: false,
+  },
+  {
+    key: 'messenger',
+    label: 'Messenger',
+    value: site.name,
+    href: site.messengerUrl,
+    external: true,
+  },
+  {
+    key: 'whatsapp',
+    label: 'WhatsApp',
+    value: site.whatsapp,
+    href: site.whatsappUrl,
+    external: true,
+  },
+] as const
+
 export function Contact() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -10,75 +34,79 @@ export function Contact() {
   return (
     <div className="page-hero">
       <div className="page-hero__inner">
-        <Reveal>
-          <span className="section-kicker">{contactPage.kicker}</span>
-          <h1>{contactPage.title}</h1>
-        </Reveal>
+        <div className="contact-page">
+          <Reveal>
+            <header className="contact-hero">
+              <span className="section-kicker">{contactPage.kicker}</span>
+              <h1>{contactPage.title}</h1>
+              <p className="contact-hero__lead">{contactPage.lead}</p>
+            </header>
+          </Reveal>
 
-        <Reveal delayMs={60}>
-          <div className="contact-layout">
-            <div className="contact-options">
-              <article className="contact-card">
-                <h3>E-mail</h3>
-                <p className="contact-card__value">{site.email}</p>
-                <a className="contact-card__link" href={`mailto:${site.email}`}>
-                  {contactPage.sendMessage}
-                </a>
-              </article>
-              <article className="contact-card">
-                <h3>Messenger</h3>
-                <p className="contact-card__value">{site.name}</p>
-                <a
-                  className="contact-card__link"
-                  href={site.messengerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {contactPage.sendMessage}
-                </a>
-              </article>
-              <article className="contact-card">
-                <h3>WhatsApp</h3>
-                <p className="contact-card__value">{site.whatsapp}</p>
-                <a
-                  className="contact-card__link"
-                  href={site.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {contactPage.sendMessage}
-                </a>
-              </article>
-            </div>
+          <Reveal delayMs={70}>
+            <div className="contact-split">
+              <aside className="contact-split__channels" aria-labelledby="contact-channels-heading">
+                <h2 id="contact-channels-heading" className="contact-split__heading">
+                  {contactPage.channelsHeading}
+                </h2>
+                <div className="contact-channels__grid">
+                  {channels.map((ch) => (
+                    <article key={ch.key} className="contact-channel card-glass">
+                      <span className="contact-channel__tag">{ch.label}</span>
+                      <p className="contact-channel__value">{ch.value}</p>
+                      <a
+                        className="contact-channel__link"
+                        href={ch.href}
+                        {...(ch.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      >
+                        {contactPage.sendMessage}
+                        <span className="contact-channel__arrow" aria-hidden>
+                          →
+                        </span>
+                      </a>
+                    </article>
+                  ))}
+                </div>
+              </aside>
 
-            <div className="contact-form-wrap">
-              <p className="hero-lead contact-form-lead">
-                Stejný formulář jako na původním webu můžete napojit na EmailJS — zatím je ukázkový. Stáhnout CV:{' '}
-                <a href={assetPaths.cv} className="contact-cv-link">
-                  cv.pdf
-                </a>{' '}
-                (soubor dejte do <code className="contact-code">public/portfolio/cv.pdf</code>).
-              </p>
-              <form className="form" onSubmit={handleSubmit} noValidate>
-                <label>
-                  {contactPage.formName}
-                  <input type="text" name="name" autoComplete="name" required />
-                </label>
-                <label>
-                  {contactPage.formEmail}
-                  <input type="email" name="email" autoComplete="email" required />
-                </label>
-                <label>
-                  {contactPage.formMessage}
-                  <textarea name="message" required rows={7} />
-                </label>
-                <button type="submit" className="btn btn-primary">
-                  {contactPage.submit}
-                </button>
-              </form>
+              <section className="contact-split__form" aria-labelledby="contact-form-heading">
+                <div className="contact-form-panel card-glass">
+                  <h2 id="contact-form-heading" className="contact-form-panel__title">
+                    {contactPage.formHeading}
+                  </h2>
+                  <p className="contact-form-panel__intro">{contactPage.formIntro}</p>
+                  <form className="form contact-form" onSubmit={handleSubmit} noValidate>
+                    <label>
+                      {contactPage.formName}
+                      <input type="text" name="name" autoComplete="name" required />
+                    </label>
+                    <label>
+                      {contactPage.formEmail}
+                      <input type="email" name="email" autoComplete="email" required />
+                    </label>
+                    <label>
+                      {contactPage.formMessage}
+                      <textarea name="message" required rows={7} />
+                    </label>
+                    <button type="submit" className="btn btn-primary contact-form__submit">
+                      {contactPage.submit} <span className="btn-arrow">→</span>
+                    </button>
+                  </form>
+                  <p className="contact-form-panel__note">
+                    {contactPage.formDevNote}{' '}
+                    <a href={assetPaths.cv} className="contact-cv-link">
+                      Stáhnout CV (PDF)
+                    </a>
+                    <span className="contact-form-panel__path">
+                      {' '}
+                      — soubor <code className="contact-code">public/portfolio/cv.pdf</code>
+                    </span>
+                  </p>
+                </div>
+              </section>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </div>
   )
