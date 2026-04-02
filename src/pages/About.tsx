@@ -21,8 +21,8 @@ export function About() {
                 {about.cards.map((c) => (
                   <article key={c.title} className="about-metric card-glass">
                     <span className="about-metric__label">{c.title}</span>
-                    {c.lines.map((line, i) => (
-                      <p key={line} className={i === 0 ? 'about-metric__value' : 'about-metric__detail'}>
+                    {c.lines.map((line) => (
+                      <p key={line} className="about-metric__value">
                         {line}
                       </p>
                     ))}

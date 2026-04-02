@@ -239,11 +239,11 @@ export const servicesPage = {
 export const contactPage = {
   kicker: 'Kontakt',
   title: 'Domluvme si další krok',
-  lead: 'Napište nám stručně váš záměr — ozveme se co nejdříve a projdeme možnosti spolupráce.',
+  lead: 'Napište nám stručně váš záměr, a ozveme se vám co nejdříve.',
   channelsHeading: 'Rychlé spojení',
-  formHeading: 'Zpráva pro tým',
+  formHeading: 'Napište nám',
   formIntro:
-    'Vyplňte formulář a ozveme se s návrhem dalších kroků. Pro naléhavé záležitosti použijte e-mail nebo chat níže.',
+    'Vyplňte formulář a ozveme se vám co nejdříve.',
   formName: 'Jméno a příjmení',
   formEmail: 'Váš e-mail',
   formMessage: 'Vaše zpráva',

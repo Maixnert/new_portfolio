@@ -1992,10 +1992,13 @@ main.site-main:focus-visible {
   color: var(--text-heading);
 }
 
-.about-metric.card-glass .about-metric__detail {
+.about-metric.card-glass .about-metric__value ~ .about-metric__value {
   margin: 0.5rem 0 0;
+  font-family: var(--font-sans);
   font-size: 0.92rem;
+  font-weight: 500;
   line-height: 1.55;
+  letter-spacing: 0;
   color: var(--text-muted);
 }
 
@@ -2174,7 +2177,17 @@ main.site-main:focus-visible {
   .contact-split {
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
     gap: 2.5rem 3rem;
+    align-items: stretch;
   }
+}
+
+.contact-split__channels,
+.contact-split__form {
+  min-height: 100%;
+}
+
+.contact-split__form {
+  display: flex;
 }
 
 .contact-split__heading {
@@ -2184,12 +2197,12 @@ main.site-main:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: rgba(168, 163, 154, 0.88);
-  margin: 0 0 1.1rem;
+  margin: 0 0 1.5rem;
 }
 
 .contact-channels__grid {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.65rem;
   grid-template-columns: 1fr;
 }
 
@@ -2257,7 +2270,8 @@ main.site-main:focus-visible {
 
 .contact-form-panel.card-glass {
   padding: clamp(1.5rem, 3vw, 2rem);
-  height: fit-content;
+  height: 100%;
+  width: 100%;
 }
 
 .contact-form-panel__title {
