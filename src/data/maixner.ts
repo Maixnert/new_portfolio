@@ -127,7 +127,7 @@ export const about = {
   cta: 'Pojďme spolupracovat',
 }
 
-export type PortfolioCategory = 'vše' | 'web' | 'design' | 'video'
+export type PortfolioCategory = 'vše' | 'web' | 'design' | 'kampaně' | 'video'
 
 export type PortfolioItem = {
   id: string
@@ -138,20 +138,20 @@ export type PortfolioItem = {
   external?: boolean
 }
 
-/** Názvy souborů jako v původním projektu — vložte je do public/portfolio/ */
+/** Obrázky práce: vložte do public/portfolio/ (včetně semin.jpg, profifix.jpg, fight-arena.jpg). */
 export const portfolioIntro =
   'Vybral jsem příklady těch nejzajímavějších projektů, na kterých jsem pracoval. Jsou z mé práce na volné noze i z práce pro firmy Alistra a Smart Connections.'
 
 export const portfolioItems: PortfolioItem[] = [
   {
     id: '1',
-    title: 'SMARTY E-Commerce',
+    title: 'Smarty · e-commerce',
     image: '/portfolio/SET-1920x1080.png',
     category: 'web',
   },
   {
     id: '2',
-    title: 'BEDTIME Stories',
+    title: 'Bedtime Stories',
     image: '/portfolio/SceneBedtime-stories.png',
     category: 'design',
   },
@@ -171,12 +171,24 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: '5',
-    title: 'Aquatis Bottle',
-    image: '/portfolio/Aquatis.jpg',
-    category: 'design',
+    title: 'Semin',
+    image: '/portfolio/semin.jpg',
+    category: 'kampaně',
   },
   {
     id: '6',
+    title: 'Profifix',
+    image: '/portfolio/profifix.jpg',
+    category: 'kampaně',
+  },
+  {
+    id: '7',
+    title: 'Fight Arena',
+    image: '/portfolio/fight-arena.jpg',
+    category: 'design',
+  },
+  {
+    id: '8',
     title: 'Lenner Motors',
     image: '/portfolio/LENNER.jpg',
     category: 'video',
@@ -184,7 +196,7 @@ export const portfolioItems: PortfolioItem[] = [
     external: true,
   },
   {
-    id: '7',
+    id: '9',
     title: 'Váš chovatel',
     image: '/portfolio/Vaschovatel.jpg',
     category: 'video',
@@ -192,16 +204,16 @@ export const portfolioItems: PortfolioItem[] = [
     external: true,
   },
   {
-    id: '8',
-    title: 'Magazín Svět průmyslu',
+    id: '10',
+    title: 'Svět průmyslu · magazín',
     image: '/portfolio/casopis.jpg',
     category: 'design',
     href: 'https://www.svetprumyslu.cz/archiv-digitalnich-casopisu/',
     external: true,
   },
   {
-    id: '9',
-    title: 'NEW OKTAGON',
+    id: '11',
+    title: 'Oktagon',
     image: '/portfolio/NEW_OKTAGON.png',
     category: 'design',
   },

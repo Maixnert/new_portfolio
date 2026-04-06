@@ -10,10 +10,11 @@ const labels: Record<PortfolioCategory, string> = {
   vše: 'Vše',
   web: 'Web',
   design: 'Design',
+  kampaně: 'Kampaně',
   video: 'Video',
 }
 
-const categories: PortfolioCategory[] = ['vše', 'web', 'design', 'video']
+const categories: PortfolioCategory[] = ['vše', 'web', 'design', 'kampaně', 'video']
 
 export function Work() {
   const [filter, setFilter] = useState<PortfolioCategory>('vše')
