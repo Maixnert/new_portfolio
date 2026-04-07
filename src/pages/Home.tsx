@@ -4,18 +4,27 @@ import { Reveal } from '../components/Reveal'
 import { Timeline } from '../components/Timeline'
 import { hero, homeSections, homeServices } from '../data/maixner'
 
-const HeroOrb = lazy(async () => {
-  const mod = await import('../components/HeroOrb')
-  return { default: mod.HeroOrb }
+function HeroOrbFallback() {
+  return <div className="hero-orb hero-orb--placeholder" aria-hidden />
+}
+
+const HeroSpacetimeGrid = lazy(async () => {
+  try {
+    const mod = await import('../components/HeroSpacetimeGrid')
+    return { default: mod.HeroSpacetimeGrid }
+  } catch (err) {
+    console.error('HeroSpacetimeGrid failed to load', err)
+    return { default: HeroOrbFallback }
+  }
 })
 
 export function Home() {
-  const heroTextRef = useRef<HTMLDivElement>(null)
+  const heroSectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const el = heroTextRef.current
+    const el = heroSectionRef.current
     if (!el) return
 
     const onScroll = () => {
@@ -30,20 +39,29 @@ export function Home() {
 
   return (
     <>
-      <section className="hero-home">
+      <section className="hero-home" ref={heroSectionRef}>
         <div className="hero-home__bg" aria-hidden />
-        <div className="hero-home__grid">
-          <div className="hero-home__text" ref={heroTextRef}>
-            <h1 className="hero-name hero-name--stagger">
-              {hero.words.map((w, i) => (
-                <span key={w.text} className="hero-word" style={{ animationDelay: `${w.delay}ms` }}>
-                  {w.text}
-                  {i < hero.words.length - 1 ? ' ' : ''}
-                </span>
-              ))}
-            
-            </h1>
-            <p className="hero-subhead">{hero.subhead}</p>
+        <div className="hero-home__layout">
+          <div className="hero-home__stack">
+            <Suspense fallback={<div className="hero-orb hero-orb--placeholder" aria-hidden />}>
+              <HeroSpacetimeGrid />
+            </Suspense>
+            <div className="hero-home__intro">
+              <h1 className="hero-name hero-name--stagger">
+                {hero.words.map((w, i) => (
+                  <span
+                    key={i}
+                    className="hero-word"
+                    style={{ '--hero-word-delay': `${w.delay}ms` } as React.CSSProperties}
+                  >
+                    {w.text}
+                  </span>
+                ))}
+              </h1>
+            </div>
+          </div>
+          <div className="hero-home__rest">
+            {hero.subhead.trim() ? <p className="hero-subhead">{hero.subhead}</p> : null}
             <p className="hero-lead">{hero.body}</p>
             <div className="btn-row">
               <Link to="/prace" className="btn btn-primary">
@@ -54,9 +72,6 @@ export function Home() {
               </Link>
             </div>
           </div>
-          <Suspense fallback={<div className="hero-orb hero-orb--placeholder" aria-hidden />}>
-            <HeroOrb />
-          </Suspense>
         </div>
         <div className="scroll-hint">
           <span>Další sekce</span>

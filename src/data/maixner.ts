@@ -37,12 +37,10 @@ export const assetPaths = {
 export const hero = {
   /** Slova pro stagger animaci — vizuálně „Jsem Tomáš. Maixner.“ + kurzor */
   words: [
-    { text: 'Komplexní digitální tvorba', delay: 0 },
-    { text: 'pro značky,', delay: 90 },
-    { text: '\u00A0které chtějí víc.', delay: 180 },
+    { text: 'Komplexní digitální tvorba pro značky,', delay: 0 },
+    { text: 'které chtějí víc.', delay: 90 },
   ] as const,
-  subhead:
-    '  ',
+  subhead: '',
   body: 'Spojujeme kreativitu s technologií, abychom budovali smysluplné řešení, která nejen ohromí, ale skutečně zlepší váš byznys. Obsah, design i strategie. Vše navržené pro reálné výsledky, růst a viditelné dopady.',
   ctaPrimary: 'Ukázat práci',
   ctaSecondary: 'Napište mi',
@@ -134,6 +132,7 @@ export type PortfolioItem = {
   title: string
   image: string
   category: Exclude<PortfolioCategory, 'vše'>
+  alsoIn?: Exclude<PortfolioCategory, 'vše'>[]
   href?: string
   external?: boolean
 }
@@ -172,20 +171,23 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: '5',
     title: 'Semin',
-    image: '/portfolio/semin.jpg',
+    image: '/portfolio/Semin.jpg',
     category: 'kampaně',
+    href: 'https://www.instagram.com/semin_cz/',
   },
   {
     id: '6',
     title: 'Profifix',
-    image: '/portfolio/profifix.jpg',
+    image: '/portfolio/PROFIFIX.jpg',
     category: 'kampaně',
+    href: 'https://www.instagram.com/profifixcz/',
   },
   {
     id: '7',
     title: 'Fight Arena',
-    image: '/portfolio/fight-arena.jpg',
+    image: '/portfolio/Fight-arena.jpg',
     category: 'design',
+    href: 'https://onefightarena.com/',
   },
   {
     id: '8',
@@ -197,9 +199,10 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: '9',
-    title: 'Váš chovatel',
+    title: 'Váš chovatel - Reklamy',
     image: '/portfolio/Vaschovatel.jpg',
     category: 'video',
+    alsoIn: ['kampaně'],
     href: 'https://www.youtube.com/watch?v=f7SPP7piyCk',
     external: true,
   },

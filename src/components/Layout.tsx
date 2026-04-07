@@ -65,7 +65,6 @@ export function Layout() {
 
   return (
     <div className="site-shell">
-      <CustomCursor />
       <a href="#main" className="skip-link">
         Přeskočit na obsah
       </a>
@@ -181,6 +180,7 @@ export function Layout() {
           </div>
         </div>
       </footer>
+      <CustomCursor />
     </div>
   )
 }

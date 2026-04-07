@@ -20,11 +20,15 @@ export function Work() {
   const [filter, setFilter] = useState<PortfolioCategory>('vše')
   const barRef = useRef<HTMLDivElement>(null)
   const [slider, setSlider] = useState({ left: 0, width: 0, ready: false })
-  const [lightbox, setLightbox] = useState<{ src: string; title: string } | null>(null)
+  const [lightbox, setLightbox] = useState<{
+    src: string
+    title: string
+    href?: string
+  } | null>(null)
 
   const visible = useMemo(() => {
     if (filter === 'vše') return portfolioItems
-    return portfolioItems.filter((i) => i.category === filter)
+    return portfolioItems.filter((i) => i.category === filter || i.alsoIn?.includes(filter))
   }, [filter])
 
   useEffect(() => {
@@ -102,15 +106,22 @@ export function Work() {
           <div className="work-grid">
             {visible.map((item, index) => {
               const featured = filter === 'vše' && index === 0
+              const itemCategories = [item.category, ...(item.alsoIn ?? [])]
               const inner = (
                 <>
                   <PortfolioTileImage src={item.image} title={item.title} />
                   <div className="work-tile__overlay" aria-hidden />
                   <div className="work-tile__arrow" aria-hidden>
-                    {item.href ? '↗' : '→'}
+                    →
                   </div>
                   <div className="work-tile__bottom">
-                    <span className="work-tile__badge">{labels[item.category]}</span>
+                    <span className="work-tile__badges">
+                      {itemCategories.map((category) => (
+                        <span key={`${item.id}-${category}`} className="work-tile__badge">
+                          {labels[category]}
+                        </span>
+                      ))}
+                    </span>
                     <span className="work-tile__title">{item.title}</span>
                   </div>
                 </>
@@ -118,24 +129,19 @@ export function Work() {
 
               return (
                 <Reveal key={item.id} delayMs={index * 50}>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      className={`work-tile work-tile--link${featured ? ' work-tile--feature' : ''}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <button
-                      type="button"
-                      className={`work-tile work-tile--button${featured ? ' work-tile--feature' : ''}`}
-                      onClick={() => setLightbox({ src: item.image, title: item.title })}
-                    >
-                      {inner}
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    className={`work-tile work-tile--button${featured ? ' work-tile--feature' : ''}`}
+                    onClick={() =>
+                      setLightbox({
+                        src: item.image,
+                        title: item.title,
+                        ...(item.href ? { href: item.href } : {}),
+                      })
+                    }
+                  >
+                    {inner}
+                  </button>
                 </Reveal>
               )
             })}
@@ -154,6 +160,19 @@ export function Work() {
           <div className="lightbox__inner" onClick={(e) => e.stopPropagation()}>
             <p className="lightbox__hint">Kliknutím mimo zavřete</p>
             <img src={lightbox.src} alt={lightbox.title} />
+            {lightbox.href ? (
+              <div className="lightbox__actions">
+                <a
+                  href={lightbox.href}
+                  className="btn btn-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Otevřít projekt <span className="btn-arrow">↗</span>
+                </a>
+              </div>
+            ) : null}
           </div>
         </div>
       )}
