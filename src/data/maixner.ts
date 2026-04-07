@@ -5,13 +5,16 @@
  */
 
 export const site = {
-  name: 'Tomáš Maixner',
+  /** Veřejná značka (logo, hlavička) */
+  name: 'Gravity.studio',
+  /** Provozovatel / fyzická osoba — patička, důvěra u chatu */
+  legalName: 'Tomáš Maixner',
   domain: 'maixnert.cz',
-  title: 'Tomáš Maixner — tvorba webů a digitální marketing',
+  title: 'Gravity.studio — web, design a digitální marketing | Šumperk, Olomouc',
   description:
-    'Tvorba webových stránek, grafiky a digitální marketing nejen pro firmy. WordPress, Shopify, HTML. Šumperk, Zábřeh, Olomouc.',
+    'Gravity.studio: tvorba webů, UI/UX, obsah a digitální marketing. Jeden partner, měřitelné výsledky. Šumperk, Zábřeh, Olomouc.',
   keywords:
-    'Grafika, web development, digitální marketing, tvorba webu, Šumperk, Zábřeh, Olomouc, Shopify, newsletter, sociální sítě, reklama, DTP, SEO',
+    'Gravity.studio, grafika, web development, digitální marketing, tvorba webu, Šumperk, Zábřeh, Olomouc, Shopify, UI/UX, newsletter, sociální sítě, SEO',
   ico: '07004389',
   address: 'Nemile 89',
   email: 'tomas@maixnert.cz',
@@ -35,13 +38,13 @@ export const assetPaths = {
 }
 
 export const hero = {
-  /** Slova pro stagger animaci — vizuálně „Jsem Tomáš. Maixner.“ + kurzor */
+  /** Dva řádky pro stagger — vizuálně ladí s hero gravity grid */
   words: [
-    { text: 'Komplexní digitální tvorba pro značky,', delay: 0 },
-    { text: 'které chtějí víc.', delay: 90 },
+    { text: 'Ohneme pro vás čas i prostor.', delay: 0 },
+    { text: 'Aby byl váš byznys vždy o skok před ostatními.', delay: 90 },
   ] as const,
   subhead: '',
-  body: 'Spojujeme kreativitu s technologií, abychom budovali smysluplné řešení, která nejen ohromí, ale skutečně zlepší váš byznys. Obsah, design i strategie. Vše navržené pro reálné výsledky, růst a viditelné dopady.',
+  body: 'Ve Gravity.studio propojujeme kreativitu s technologií a táhneme projekty jedním směrem: od strategie a designu po obsah a měřitelné výsledky. Méně rozptylu, víc hmoty v tom, co vašim klientům skutečně pomůže růst.',
   ctaPrimary: 'Ukázat práci',
   ctaSecondary: 'Napište mi',
 }
@@ -77,7 +80,7 @@ export const timelineSteps = [
   {
     n: '01',
     title: 'Vyslechneme vás',
-    body: 'Řeknete nám, co potřebujete. My se zeptáme na vše potřebné, abychom pochopili projekt i vaše cíle.',
+    body: 'Řeknete nám, co potřebujete. Zeptáme se na vše potřebné, abychom pochopili projekt i vaše cíle.',
   },
   {
     n: '02',
@@ -100,21 +103,21 @@ export const homeSections = {
 }
 
 export const footerTagline =
-  'Freelance designer & developer · Dostupný pro nové projekty'
+  'Studio pro web, design a digitální marketing · Dostupní pro nové projekty'
 
 export const about = {
-  kicker: 'Kdo jsme',
-  title: 'Partner pro digitální růst',
-  lead: 'Design, vývoj a marketing pod jednou střechou — od strategii po měřitelné výsledky.',
+  kicker: 'O studiu',
+  title: 'Gravity.studio — partner pro digitální růst',
+  lead: 'Design, vývoj a marketing pod jednou střechou — od strategie po měřitelné výsledky, bez rozházených „planet“ mezi agenturami.',
   cards: [
     {
-      title: 'Tým',
-      lines: ['Design + vývoj + marketing', 'Jeden partner, jeden proces'],
+      title: 'Studio',
+      lines: ['Design + vývoj + marketing', 'Jeden partner, jedna soustava'],
     },
     { title: 'Klienti', lines: ['30+ značek'] },
     { title: 'Projekty', lines: ['40+ realizací od webu po kampaně'] },
   ],
-  body: 'Nejsme jen dodavatel. Jsme partner, který propojuje strategii, design a technologii do jednoho funkčního celku. Pomáháme firmám růst online bez chaosu, zdržení a roztříštěné komunikace mezi více týmy.',
+  body: 'Nejsme jen dodavatel. Ve Gravity.studio propojujeme strategii, design a technologii do jednoho funkčního celku a pomáháme firmám růst online — bez chaosu, zdržení a roztříštěné komunikace mezi více týmy.',
   bodySecondary:
     'Každý projekt stavíme na datech, jasných cílech a reálném byznysovém dopadu. Od prvního workshopu po spuštění a následnou optimalizaci držíme stejný standard: kvalita, transparentnost a výsledky.',
   values: [
@@ -139,7 +142,7 @@ export type PortfolioItem = {
 
 /** Obrázky práce: vložte do public/portfolio/ (včetně semin.jpg, profifix.jpg, fight-arena.jpg). */
 export const portfolioIntro =
-  'Vybral jsem příklady těch nejzajímavějších projektů, na kterých jsem pracoval. Jsou z mé práce na volné noze i z práce pro firmy Alistra a Smart Connections.'
+  'Vybrané ukázky projektů z práce studia na volné noze i z realizací pro firmy Alistra a Smart Connections.'
 
 export const portfolioItems: PortfolioItem[] = [
   {

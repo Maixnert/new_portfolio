@@ -150,10 +150,13 @@ export function Layout() {
           <div className="site-footer__block">
             <p className="site-footer__name">{site.name}</p>
             <p className="site-footer__tagline">{footerTagline}</p>
+            <p className="site-footer__meta">Provozovatel: {site.legalName}</p>
             <p className="site-footer__meta">
               IČO: {site.ico} · {site.address}
             </p>
-            <p className="site-footer__meta">&copy; {site.name}</p>
+            <p className="site-footer__meta">
+              &copy; {new Date().getFullYear()} {site.name}
+            </p>
           </div>
           <div className="footer-social" aria-label="Sociální sítě">
             <a href={site.linkedin} target="_blank" rel="noopener noreferrer">

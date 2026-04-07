@@ -13,7 +13,7 @@ const channels = [
   {
     key: 'messenger',
     label: 'Messenger',
-    value: site.name,
+    value: site.legalName,
     href: site.messengerUrl,
     external: true,
   },

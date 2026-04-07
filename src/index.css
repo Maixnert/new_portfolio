@@ -1020,30 +1020,31 @@ main.site-main:focus-visible {
   pointer-events: none;
   z-index: 0;
   border-radius: 50%;
-  inset: -22%;
+  /* Positive inset keeps blurred glow off the canvas edges */
+  inset: 14% 16%;
 }
 
 .hero-orb--interactive::before {
   background: radial-gradient(
-    ellipse 52% 50% at 44% 38%,
+    ellipse 48% 46% at 44% 38%,
     var(--orb-glow-coral) 0%,
-    rgba(232, 89, 60, 0.12) 38%,
-    transparent 72%
+    rgba(232, 89, 60, 0.1) 32%,
+    transparent 58%
   );
-  filter: blur(38px);
-  opacity: 0.88;
+  filter: blur(32px);
+  opacity: 0.82;
 }
 
 .hero-orb--interactive::after {
-  inset: -12%;
+  inset: 18% 20%;
   background: radial-gradient(
-    ellipse 38% 36% at 52% 46%,
+    ellipse 34% 32% at 52% 46%,
     var(--orb-glow-magenta) 0%,
-    rgba(200, 79, 176, 0.1) 45%,
-    transparent 68%
+    rgba(200, 79, 176, 0.08) 36%,
+    transparent 56%
   );
-  filter: blur(28px);
-  opacity: 0.75;
+  filter: blur(22px);
+  opacity: 0.68;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1058,12 +1059,12 @@ main.site-main:focus-visible {
 
 @keyframes hero-orb-glow-drift {
   from {
-    opacity: 0.62;
-    transform: scale(0.98);
+    opacity: 0.58;
+    transform: scale(0.99);
   }
   to {
-    opacity: 0.92;
-    transform: scale(1.03);
+    opacity: 0.84;
+    transform: scale(1.01);
   }
 }
 
@@ -1174,15 +1175,15 @@ main.site-main:focus-visible {
   }
 
   .hero-orb--interactive::before {
-    inset: -14%;
-    filter: blur(26px);
-    opacity: 0.72;
+    inset: 10% 12%;
+    filter: blur(22px);
+    opacity: 0.68;
   }
 
   .hero-orb--interactive::after {
-    inset: -8%;
-    filter: blur(20px);
-    opacity: 0.62;
+    inset: 14% 16%;
+    filter: blur(18px);
+    opacity: 0.58;
   }
 
   .hero-orb__canvas--three {
