@@ -29,6 +29,18 @@ const channels = [
 export function Contact() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const form = e.currentTarget
+    if (!form.checkValidity()) {
+      form.reportValidity()
+      return
+    }
+    const fd = new FormData(form)
+    const name = String(fd.get('name') ?? '').trim()
+    const replyEmail = String(fd.get('email') ?? '').trim()
+    const message = String(fd.get('message') ?? '').trim()
+    const subject = `Kontakt z webu — ${name}`
+    const body = `Jméno: ${name}\nE-mail: ${replyEmail}\n\n${message}\n`
+    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   return (
@@ -76,7 +88,7 @@ export function Contact() {
                       {contactPage.formHeading}
                     </h2>
                     <p className="contact-form-panel__intro">{contactPage.formIntro}</p>
-                    <form className="form contact-form" onSubmit={handleSubmit} noValidate>
+                    <form className="form contact-form" onSubmit={handleSubmit}>
                       <label>
                         {contactPage.formName}
                         <input type="text" name="name" autoComplete="name" required />

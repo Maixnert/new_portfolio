@@ -1,35 +1,59 @@
 /**
- * Texty a struktura podle původního webu (portfolio-master).
- * Obrázky: zkopírujte ze starého projektu do public/portfolio/ — názvy souborů níže.
- * Logo: přejmenujte „Logo (2).png“ na logo.png (nebo upravte logoSrc).
+ * Texty a assety webu Massflow.
+ * Obrázky: public/portfolio/ — názvy viz assetPaths a portfolioItems.
+ * Logo: public/portfolio/Logo_white@3x.png (nebo upravte assetPaths.logo).
  */
 
 export const site = {
   /** Veřejná značka (logo, hlavička) */
-  name: 'Gravity.studio',
+  name: 'Massflow',
   /** Provozovatel / fyzická osoba — patička, důvěra u chatu */
   legalName: 'Tomáš Maixner',
-  domain: 'maixnert.cz',
-  title: 'Gravity.studio — web, design a digitální marketing | Šumperk, Olomouc',
+  /** Veřejná doména webu */
+  domain: 'massflow.cz',
+  title: 'Massflow — web, design a digitální marketing | Šumperk, Olomouc',
   description:
-    'Gravity.studio: tvorba webů, UI/UX, obsah a digitální marketing. Jeden partner, měřitelné výsledky. Šumperk, Zábřeh, Olomouc.',
+    'Massflow: tvorba webů, UI/UX, obsah a digitální marketing. Jasný proud od strategie po měřitelné výsledky. Šumperk, Zábřeh, Olomouc.',
   keywords:
-    'Gravity.studio, grafika, web development, digitální marketing, tvorba webu, Šumperk, Zábřeh, Olomouc, Shopify, UI/UX, newsletter, sociální sítě, SEO',
+    'Massflow, grafika, web development, digitální marketing, tvorba webu, Šumperk, Zábřeh, Olomouc, Shopify, UI/UX, newsletter, sociální sítě, SEO',
   ico: '07004389',
   address: 'Nemile 89',
   email: 'tomas@maixnert.cz',
   messengerUrl: 'https://m.me/Majormaixner',
   whatsapp: '+420 732 545 969',
-  whatsappUrl: 'https://wa.me/732545969',
+  whatsappUrl: 'https://wa.me/420732545969',
   linkedin: 'https://www.linkedin.com/in/tom%C3%A1%C5%A1-maixner-10485624a/',
   facebook: 'https://www.facebook.com/maixnert/',
   dribbble: 'https://dribbble.com/msjor',
   instagram: 'https://www.instagram.com/maixnert/',
+  /** Zapněte na true, až budete chtít znovu zobrazit odkazy v patičce */
+  showFooterSocial: false,
+}
+
+/** Kanonická báze URL (https + doména) — OG, sitemap, canonical */
+export const siteOrigin = `https://${site.domain}` as const
+
+/**
+ * Cesta k obrázku pro sdílení (og:image, Twitter). Nahraďte souborem ~1200×630 px,
+ * např. public/portfolio/og-share.png, až budete mít.
+ */
+export const socialShareImagePath = '/portfolio/favicon.png'
+
+export type PageMeta = {
+  title: string
+  description: string
+  noIndex?: boolean
+}
+
+export const notFoundPageMeta: PageMeta = {
+  title: 'Stránka nenalezena — Massflow',
+  description: 'Požadovaná stránka neexistuje. Vraťte se na úvod nebo použijte hlavní menu.',
+  noIndex: true,
 }
 
 export const assetPaths = {
-  /** Přejmenujte původní Logo (2).png → logo.png do public/portfolio/ */
-  logo: '/portfolio/logo.png',
+  /** Header logo */
+  logo: '/portfolio/Logo_white@3x.png',
   profile: '/portfolio/Profile.jpg',
   cv: '/portfolio/cv.pdf',
   wave: '/assets/legacy/wave.svg',
@@ -38,13 +62,13 @@ export const assetPaths = {
 }
 
 export const hero = {
-  /** Dva řádky pro stagger — vizuálně ladí s hero gravity grid */
+  /** Dva řádky pro stagger (nadpis) */
   words: [
-    { text: 'Ohneme pro vás čas i prostor.', delay: 0 },
-    { text: 'Aby byl váš byznys vždy o skok před ostatními.', delay: 90 },
+    { text: 'Dáme vašemu byznysu gravitaci,', delay: 0 },
+    { text: 'která přitahuje nové klienty.', delay: 90 },
   ] as const,
   subhead: '',
-  body: 'Ve Gravity.studio propojujeme kreativitu s technologií a táhneme projekty jedním směrem: od strategie a designu po obsah a měřitelné výsledky. Méně rozptylu, víc hmoty v tom, co vašim klientům skutečně pomůže růst.',
+  body: 'Massflow propojuje strategii, design a obsah tak, aby váš byznys nepotřeboval hledat klienty, s naší pomocí přijdou sami.',
   ctaPrimary: 'Ukázat práci',
   ctaSecondary: 'Napište mi',
 }
@@ -95,7 +119,7 @@ export const timelineSteps = [
 ] as const
 
 export const homeSections = {
-  servicesKicker: 'CO UMÍM',
+  servicesKicker: 'CO UMÍME',
   servicesTitle: 'Služby, které mluví za vás',
   servicesCta: 'Zobrazit všechny služby',
   processKicker: 'JAK TO CHODÍ',
@@ -103,21 +127,21 @@ export const homeSections = {
 }
 
 export const footerTagline =
-  'Studio pro web, design a digitální marketing · Dostupní pro nové projekty'
+  'Massflow — web, design a digitální marketing · Dostupní pro nové projekty'
 
 export const about = {
-  kicker: 'O studiu',
-  title: 'Gravity.studio — partner pro digitální růst',
-  lead: 'Design, vývoj a marketing pod jednou střechou — od strategie po měřitelné výsledky, bez rozházených „planet“ mezi agenturami.',
+  kicker: 'O Massflow',
+  title: 'Massflow — partner pro digitální růst',
+  lead: 'Design, vývoj a marketing v jednom proudu — od strategie po měřitelné výsledky, bez roztříštění mezi několika dodavateli.',
   cards: [
     {
-      title: 'Studio',
-      lines: ['Design + vývoj + marketing', 'Jeden partner, jedna soustava'],
+      title: 'Massflow',
+      lines: ['Design + vývoj + marketing', 'Jeden partner, jeden kontinuální flow'],
     },
     { title: 'Klienti', lines: ['30+ značek'] },
     { title: 'Projekty', lines: ['40+ realizací od webu po kampaně'] },
   ],
-  body: 'Nejsme jen dodavatel. Ve Gravity.studio propojujeme strategii, design a technologii do jednoho funkčního celku a pomáháme firmám růst online — bez chaosu, zdržení a roztříštěné komunikace mezi více týmy.',
+  body: 'Nejsme jen dodavatel. V Massflow propojujeme strategii, design a technologii do jednoho funkčního celku a pomáháme firmám růst online — bez chaosu, zbytečných zastávek a roztříštěné komunikace mezi více týmy.',
   bodySecondary:
     'Každý projekt stavíme na datech, jasných cílech a reálném byznysovém dopadu. Od prvního workshopu po spuštění a následnou optimalizaci držíme stejný standard: kvalita, transparentnost a výsledky.',
   values: [
@@ -142,7 +166,7 @@ export type PortfolioItem = {
 
 /** Obrázky práce: vložte do public/portfolio/ (včetně semin.jpg, profifix.jpg, fight-arena.jpg). */
 export const portfolioIntro =
-  'Vybrané ukázky projektů z práce studia na volné noze i z realizací pro firmy Alistra a Smart Connections.'
+  'Vybrané ukázky projektů z naší spolupráce.'
 
 export const portfolioItems: PortfolioItem[] = [
   {
@@ -226,10 +250,10 @@ export const portfolioItems: PortfolioItem[] = [
 ]
 
 export const servicesPage = {
-  kicker: 'Co dělám?',
-  title: 'Služby, které nabízím',
+  kicker: 'Co děláme?',
+  title: 'Služby, které nabízíme',
   intro:
-    'Mám široké zkušenosti z oblastí tvorby obsahu, web designu, web developmentu, správy webů i digitálního marketingu.',
+    'Máme široké zkušenosti z tvorby obsahu, web designu, vývoje, správy webů i digitálního marketingu — a držíme je v jednom proudu pro vaše projekty.',
   rows: [
     {
       num: '01',
@@ -261,11 +285,39 @@ export const contactPage = {
   channelsHeading: 'Rychlé spojení',
   formHeading: 'Napište nám',
   formIntro:
-    'Vyplňte formulář a ozveme se vám co nejdříve.',
+    'Vyplňte formulář a odešlete — otevře se váš e-mailový klient se zprávou na naši adresu.',
   formName: 'Jméno a příjmení',
   formEmail: 'Váš e-mail',
   formMessage: 'Vaše zpráva',
   submit: 'Odeslat zprávu',
   sendMessage: 'Otevřít',
-  formDevNote: 'Formulář je zatím ukázkový — lze napojit na EmailJS nebo váš backend.',
+}
+
+export const pageMetaByPath = {
+  '/': {
+    title: site.title,
+    description: site.description,
+  },
+  '/prace': {
+    title: 'Projekty — ukázky webů, designu a kampaní | Massflow',
+    description: `${portfolioIntro} Web, grafika, video a digitální marketing — Šumperk, Olomouc.`,
+  },
+  '/sluzby': {
+    title: 'Služby — UI/UX, vývoj, obsah, marketing | Massflow',
+    description: servicesPage.intro,
+  },
+  '/o-mne': {
+    title: 'O Massflow — partner pro digitální růst',
+    description: about.lead,
+  },
+  '/kontakt': {
+    title: 'Kontakt — Massflow | Šumperk, Olomouc',
+    description: `${contactPage.lead} E-mail, Messenger, WhatsApp.`,
+  },
+} as const satisfies Record<string, PageMeta>
+
+export function getPageMeta(pathname: string): PageMeta {
+  const known = pageMetaByPath[pathname as keyof typeof pageMetaByPath]
+  if (known) return known
+  return notFoundPageMeta
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { CustomCursor } from './CustomCursor'
+import { SiteMeta } from './SiteMeta'
 import { assetPaths, footerTagline, site } from '../data/maixner'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -32,7 +33,7 @@ export function Layout() {
   }, [])
 
   useEffect(() => {
-    closeMenu()
+    queueMicrotask(() => setMenuOpen(false))
   }, [pathname])
 
   useEffect(() => {
@@ -60,11 +61,13 @@ export function Layout() {
   }, [])
 
   useEffect(() => {
-    if (!mobileNavMq && menuOpen) closeMenu()
+    if (mobileNavMq || !menuOpen) return
+    queueMicrotask(() => setMenuOpen(false))
   }, [mobileNavMq, menuOpen])
 
   return (
     <div className="site-shell">
+      <SiteMeta />
       <a href="#main" className="skip-link">
         Přeskočit na obsah
       </a>
@@ -86,7 +89,7 @@ export function Layout() {
                 src={assetPaths.logo}
                 alt={site.name}
                 className="brand-mark__img"
-                height={36}
+                decoding="async"
                 onError={() => setLogoOk(false)}
               />
             ) : (
@@ -146,7 +149,11 @@ export function Layout() {
       </main>
 
       <footer className="site-footer">
-        <div className="layout-inner site-footer__inner site-footer__inner--maixner">
+        <div
+          className={`layout-inner site-footer__inner site-footer__inner--massflow${
+            site.showFooterSocial ? '' : ' site-footer__inner--solo'
+          }`}
+        >
           <div className="site-footer__block">
             <p className="site-footer__name">{site.name}</p>
             <p className="site-footer__tagline">{footerTagline}</p>
@@ -158,29 +165,31 @@ export function Layout() {
               &copy; {new Date().getFullYear()} {site.name}
             </p>
           </div>
-          <div className="footer-social" aria-label="Sociální sítě">
-            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-            <span className="footer-social__sep" aria-hidden>
-              ·
-            </span>
-            <a href={site.facebook} target="_blank" rel="noopener noreferrer">
-              Facebook
-            </a>
-            <span className="footer-social__sep" aria-hidden>
-              ·
-            </span>
-            <a href={site.dribbble} target="_blank" rel="noopener noreferrer">
-              Dribbble
-            </a>
-            <span className="footer-social__sep" aria-hidden>
-              ·
-            </span>
-            <a href={site.instagram} target="_blank" rel="noopener noreferrer">
-              Instagram
-            </a>
-          </div>
+          {site.showFooterSocial ? (
+            <div className="footer-social" aria-label="Sociální sítě">
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+              <span className="footer-social__sep" aria-hidden>
+                ·
+              </span>
+              <a href={site.facebook} target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a>
+              <span className="footer-social__sep" aria-hidden>
+                ·
+              </span>
+              <a href={site.dribbble} target="_blank" rel="noopener noreferrer">
+                Dribbble
+              </a>
+              <span className="footer-social__sep" aria-hidden>
+                ·
+              </span>
+              <a href={site.instagram} target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </div>
+          ) : null}
         </div>
       </footer>
       <CustomCursor />

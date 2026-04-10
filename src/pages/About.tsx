@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { about } from '../data/maixner'
 
@@ -59,24 +58,7 @@ export function About() {
             </div>
           </Reveal>
 
-          <Reveal delayMs={140}>
-            <div className="about-cta-strip">
-              <div className="about-cta-strip__copy">
-                <span className="about-cta-strip__label">Další krok</span>
-                <p className="about-cta-strip__text">
-                  Krátký call — projdeme vaše cíle a navrhneme další kroky.
-                </p>
-              </div>
-              <div className="about-cta-strip__actions">
-                <Link to="/kontakt" className="btn btn-primary">
-                  {about.cta} <span className="btn-arrow">→</span>
-                </Link>
-                <Link to="/sluzby" className="btn btn-ghost">
-                  Naše služby
-                </Link>
-              </div>
-            </div>
-          </Reveal>
+        
         </div>
       </div>
     </div>

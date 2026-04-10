@@ -274,16 +274,28 @@ p:last-child {
   display: flex;
   align-items: center;
   text-decoration: none;
+  flex-shrink: 0;
+  min-width: 0;
+  max-width: min(220px, 48vw);
 }
 
 .brand-mark:hover {
   opacity: 0.9;
 }
 
+/* @2x/@3x assets: cap display size so header stays balanced */
 .brand-mark__img {
-  height: 34px;
-  width: auto;
   display: block;
+  width: auto;
+  height: auto;
+  max-height: 32px;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.site-header--compact .brand-mark__img {
+  max-height: 28px;
 }
 
 .nav {
@@ -674,8 +686,23 @@ main.site-main:focus-visible {
   justify-content: space-between;
 }
 
-.site-footer__inner--maixner {
+.site-footer__inner--massflow {
   align-items: flex-start;
+}
+
+/* One column when social links are off — avoid space-between + shrink-wrapped block */
+.site-footer__inner--massflow.site-footer__inner--solo {
+  justify-content: flex-start;
+}
+
+.site-footer__inner--solo .site-footer__block {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.site-footer__inner--solo .site-footer__tagline {
+  max-width: min(38rem, 100%);
 }
 
 .site-footer__block {

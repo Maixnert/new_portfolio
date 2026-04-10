@@ -70,7 +70,7 @@ export function Work() {
     <div className="page-hero">
       <div className="page-hero__inner">
         <Reveal>
-          <span className="section-kicker">Co dělám?</span>
+          <span className="section-kicker">Co děláme ?</span>
           <h1>Nejlepší projekty</h1>
         </Reveal>
         <Reveal delayMs={50}>
