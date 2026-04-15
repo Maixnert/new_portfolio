@@ -9,8 +9,8 @@ export const site = {
   name: 'Massflow',
   /** Provozovatel / fyzická osoba — patička, důvěra u chatu */
   legalName: 'Tomáš Maixner',
-  /** Veřejná doména webu */
-  domain: 'massflow.cz',
+  /** Veřejná doména webu (kanonická varianta) */
+  domain: 'www.massflow.cz',
   title: 'Massflow — web, design a digitální marketing | Šumperk, Olomouc',
   description:
     'Massflow: tvorba webů, UI/UX, obsah a digitální marketing. Jasný proud od strategie po měřitelné výsledky. Šumperk, Zábřeh, Olomouc.',
@@ -34,10 +34,10 @@ export const site = {
 export const siteOrigin = `https://${site.domain}` as const
 
 /**
- * Cesta k obrázku pro sdílení (og:image, Twitter). Nahraďte souborem ~1200×630 px,
- * např. public/portfolio/og-share.png, až budete mít.
+ * Cesta k obrázku pro sdílení (og:image, Twitter).
+ * Doporučení: 1200x630 px.
  */
-export const socialShareImagePath = '/portfolio/favicon.png'
+export const socialShareImagePath = '/portfolio/landing-page.jpg'
 
 export type PageMeta = {
   title: string
@@ -131,23 +131,23 @@ export const footerTagline =
 
 export const about = {
   kicker: 'O Massflow',
-  title: 'Massflow — partner pro digitální růst',
-  lead: 'Design, vývoj a marketing v jednom proudu — od strategie po měřitelné výsledky, bez roztříštění mezi několika dodavateli.',
+  title: 'Massflow:\npartner pro digitální růst',
+  lead: 'Design, vývoj a marketing v jednom proudu. Od strategie po měřitelné výsledky, bez roztříštění mezi několika dodavateli.',
   cards: [
     {
       title: 'Massflow',
-      lines: ['Design + vývoj + marketing', 'Jeden partner, jeden kontinuální flow'],
+      lines: ['Design + vývoj + marketing'],
     },
     { title: 'Klienti', lines: ['30+ značek'] },
     { title: 'Projekty', lines: ['40+ realizací od webu po kampaně'] },
   ],
-  body: 'Nejsme jen dodavatel. V Massflow propojujeme strategii, design a technologii do jednoho funkčního celku a pomáháme firmám růst online — bez chaosu, zbytečných zastávek a roztříštěné komunikace mezi více týmy.',
+  body: 'Nejsme jen dodavatel. V Massflow propojujeme strategii, design a technologie tak, aby spolu skutečně fungovaly. Pomáháme firmám růst online bez zbytečných překážek.',
   bodySecondary:
-    'Každý projekt stavíme na datech, jasných cílech a reálném byznysovém dopadu. Od prvního workshopu po spuštění a následnou optimalizaci držíme stejný standard: kvalita, transparentnost a výsledky.',
+    'Každý projekt stavíme na datech, jasných cílech a reálném dopadu na byznys. Od první schůzky až po spuštění a další rozvoj držíme stejnou laťku: kvalitu, otevřenost a výsledky, které dávají smysl.',
   values: [
-    'Srozumitelná komunikace bez agenturní mlhy.',
-    'Rozhodnutí podložená daty i zkušeností.',
-    'Dlouhodobá spolupráce místo jednorázového odevzdání.',
+    'Mluvíme srozumitelně a na rovinu',
+    'Rozhodujeme se podle dat i praxe.',
+    'Myslíme dlouhodobě, ne jen na jednorázové odevzdání.',
   ],
   cta: 'Pojďme spolupracovat',
 }
@@ -306,7 +306,7 @@ export const pageMetaByPath = {
     title: 'Služby — UI/UX, vývoj, obsah, marketing | Massflow',
     description: servicesPage.intro,
   },
-  '/o-mne': {
+  '/o-nas': {
     title: 'O Massflow — partner pro digitální růst',
     description: about.lead,
   },

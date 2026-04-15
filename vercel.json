@@ -1,0 +1,4 @@
+{
+  "redirects": [{ "source": "/o-mne", "destination": "/o-nas", "permanent": true }],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

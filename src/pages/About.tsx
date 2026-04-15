@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { Reveal } from '../components/Reveal'
 import { about } from '../data/maixner'
 
@@ -9,7 +10,14 @@ export function About() {
           <Reveal>
             <header className="about-hero">
               <span className="section-kicker">{about.kicker}</span>
-              <h1>{about.title}</h1>
+              <h1>
+                {about.title.split('\n').map((line, i) => (
+                  <Fragment key={i}>
+                    {i > 0 ? <br /> : null}
+                    {line}
+                  </Fragment>
+                ))}
+              </h1>
               {about.lead ? <p className="about-hero__lead">{about.lead}</p> : null}
             </header>
           </Reveal>
@@ -19,9 +27,16 @@ export function About() {
               <div className="about-metrics__grid">
                 {about.cards.map((c) => (
                   <article key={c.title} className="about-metric card-glass">
-                    <span className="about-metric__label">{c.title}</span>
-                    {c.lines.map((line) => (
-                      <p key={line} className="about-metric__value">
+                    <span className="about-metric__label">
+                      {c.title.split('\n').map((line, i) => (
+                        <Fragment key={i}>
+                          {i > 0 ? <br /> : null}
+                          {line}
+                        </Fragment>
+                      ))}
+                    </span>
+                    {(Array.isArray(c.lines) ? c.lines : [c.lines]).map((line, lineIdx) => (
+                      <p key={`${c.title}-${lineIdx}`} className="about-metric__value">
                         {line}
                       </p>
                     ))}

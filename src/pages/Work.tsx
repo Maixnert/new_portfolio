@@ -196,7 +196,7 @@ function PortfolioTileImage({ src, title }: { src: string; title: string }) {
     <img
       className="work-tile__img"
       src={src}
-      alt=""
+      alt={`${title} — ukázka projektu`}
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}

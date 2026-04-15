@@ -129,8 +129,8 @@ export function Layout() {
               <NavLink to="/sluzby" className={navLinkClass} onClick={closeMenu}>
                 Služby
               </NavLink>
-              <NavLink to="/o-mne" className={navLinkClass} onClick={closeMenu}>
-                O mně
+              <NavLink to="/o-nas" className={navLinkClass} onClick={closeMenu}>
+                O nás
               </NavLink>
               <NavLink
                 to="/kontakt"

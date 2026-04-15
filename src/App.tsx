@@ -15,7 +15,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="prace" element={<Work />} />
           <Route path="sluzby" element={<Services />} />
-          <Route path="o-mne" element={<About />} />
+          <Route path="o-nas" element={<About />} />
           <Route path="kontakt" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>
