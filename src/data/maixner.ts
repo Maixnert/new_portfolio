@@ -18,7 +18,7 @@ export const site = {
     'Massflow, grafika, web development, digitální marketing, tvorba webu, Šumperk, Zábřeh, Olomouc, Shopify, UI/UX, newsletter, sociální sítě, SEO',
   ico: '07004389',
   address: 'Nemile 89',
-  email: 'tomas@maixnert.cz',
+  email: 'marketing@massflow.cz',
   messengerUrl: 'https://m.me/Majormaixner',
   whatsapp: '+420 732 545 969',
   whatsappUrl: 'https://wa.me/420732545969',
@@ -33,11 +33,10 @@ export const site = {
 /** Kanonická báze URL (https + doména) — OG, sitemap, canonical */
 export const siteOrigin = `https://${site.domain}` as const
 
-/**
- * Cesta k obrázku pro sdílení (og:image, Twitter).
- * Doporučení: 1200x630 px.
- */
-export const socialShareImagePath = '/portfolio/landing-page.jpg'
+/** Obrázek pro sdílení (og:image, Twitter) — public/thumbnail.jpg */
+export const socialShareImagePath = '/thumbnail.jpg'
+export const socialShareImageWidth = 1912
+export const socialShareImageHeight = 1107
 
 export type PageMeta = {
   title: string
@@ -284,12 +283,14 @@ export const contactPage = {
   lead: 'Napište nám stručně váš záměr, a ozveme se vám co nejdříve.',
   channelsHeading: 'Rychlé spojení',
   formHeading: 'Napište nám',
-  formIntro:
-    'Vyplňte formulář a odešlete — otevře se váš e-mailový klient se zprávou na naši adresu.',
+  formIntro: 'Vyplňte formulář a odešlete — zpráva dorazí na marketing@massflow.cz a ozveme se vám co nejdříve.',
   formName: 'Jméno a příjmení',
   formEmail: 'Váš e-mail',
   formMessage: 'Vaše zpráva',
   submit: 'Odeslat zprávu',
+  formSubmitting: 'Odesílám…',
+  formSuccess: 'Vaše zpráva byla úspěšně odeslána.',
+  formError: 'Odeslání se nezdařilo. Zkuste to znovu nebo nás kontaktujte přímo e-mailem či WhatsApp.',
   sendMessage: 'Otevřít',
 }
 

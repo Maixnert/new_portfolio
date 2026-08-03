@@ -2858,6 +2858,48 @@ main.site-main:focus-visible {
   color: var(--text-muted);
 }
 
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+  padding: 0;
+}
+
+.form-feedback {
+  min-height: 0;
+}
+
+.form-feedback__msg {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.form-feedback__msg--success {
+  color: #c8f0d4;
+  background: rgba(72, 160, 104, 0.14);
+  border: 1px solid rgba(72, 160, 104, 0.35);
+}
+
+.form-feedback__msg--error {
+  color: #ffd4cc;
+  background: rgba(232, 89, 60, 0.12);
+  border: 1px solid rgba(232, 89, 60, 0.35);
+}
+
+.contact-form__submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .about-tools-kicker {
   margin-top: 2rem;
 }

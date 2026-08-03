@@ -4,7 +4,9 @@ import {
   getPageMeta,
   site,
   siteOrigin,
+  socialShareImageHeight,
   socialShareImagePath,
+  socialShareImageWidth,
 } from '../data/maixner'
 
 function normalizePath(pathname: string) {
@@ -62,8 +64,9 @@ export function SiteMeta() {
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:alt" content={`${site.name} — digitální marketing, web a design`} />
-      <meta property="og:image:width" content="1920" />
-      <meta property="og:image:height" content="1080" />
+      <meta property="og:image:width" content={String(socialShareImageWidth)} />
+      <meta property="og:image:height" content={String(socialShareImageHeight)} />
+      <meta property="og:image:type" content="image/jpeg" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />

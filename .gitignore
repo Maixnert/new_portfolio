@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Forpsi SMTP credentials (create from public/api/mail.config.example.php)
+public/api/mail.config.php
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
