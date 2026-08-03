@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { CaseStudyFilmstrip } from '../components/CaseStudyFilmstrip'
 import { CtaStrip } from '../components/CtaStrip'
 import { Reveal } from '../components/Reveal'
 import { caseStudyUi, ctas, getCaseStudy } from '../data/maixner'
@@ -15,6 +16,9 @@ export function CaseStudy() {
   if (!study) {
     return <Navigate to="/prace" replace />
   }
+
+  const mosaic = study.coverMosaic
+  const mosaicLayout = study.coverMosaicLayout ?? 'trio'
 
   return (
     <div className="page-hero">
@@ -57,15 +61,45 @@ export function CaseStudy() {
           </Reveal>
 
           <Reveal delayMs={60}>
-            <figure className="case-study__cover">
-              <img
-                src={study.coverImage}
-                alt={study.coverAlt}
-                width={1120}
-                height={700}
-                decoding="async"
-              />
-            </figure>
+            {mosaic && mosaic.length > 0 ? (
+              mosaicLayout === 'screens' ? (
+                <CaseStudyFilmstrip items={mosaic} ariaLabel={study.coverAlt} />
+              ) : (
+                <div
+                  className={`case-study__cover-mosaic case-study__cover-mosaic--${mosaicLayout}`}
+                  aria-label={study.coverAlt}
+                >
+                  {mosaic.map((item) => (
+                    <figure
+                      key={item.src}
+                      className={`case-study__cover-mosaic-item${
+                        item.placement
+                          ? ` case-study__cover-mosaic-item--${item.placement}`
+                          : ''
+                      }`}
+                    >
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        width={960}
+                        height={640}
+                        decoding="async"
+                      />
+                    </figure>
+                  ))}
+                </div>
+              )
+            ) : (
+              <figure className="case-study__cover">
+                <img
+                  src={study.coverImage}
+                  alt={study.coverAlt}
+                  width={1120}
+                  height={700}
+                  decoding="async"
+                />
+              </figure>
+            )}
           </Reveal>
 
           {study.sections.map((section, index) => (

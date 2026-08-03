@@ -181,6 +181,17 @@ export type PortfolioItem = {
   caseStudySlug?: string
 }
 
+export type CaseStudyGalleryItem = {
+  src: string
+  alt: string
+  /** Optional quiet caption under the frame */
+  label?: string
+  /** Crop in preview; click expands to full image */
+  previewCrop?: boolean
+  /** Mosaic placement when used as cover grid */
+  placement?: 'primary' | 'accent' | 'secondary'
+}
+
 export type CaseStudySection = {
   id: string
   heading: string
@@ -197,13 +208,17 @@ export type CaseStudy = {
   lead: string
   coverImage: string
   coverAlt: string
+  /** When set, replaces the single full-width cover with a mosaic grid */
+  coverMosaic?: CaseStudyGalleryItem[]
+  /** Mosaic layout — trio is the default 3-tile arrangement */
+  coverMosaicLayout?: 'trio' | 'screens'
   year: string
   services: string[]
   liveUrl?: string
   liveLabel?: string
   meta: { label: string; value: string }[]
   sections: CaseStudySection[]
-  gallery?: { src: string; alt: string }[]
+  gallery?: CaseStudyGalleryItem[]
   results?: { label: string; value: string }[]
   seo: PageMeta
 }
@@ -227,8 +242,27 @@ export const caseStudies: CaseStudy[] = [
     kicker: 'Case study',
     lead:
       'Kompletní redesign a UI/UX struktura pro průmyslový mediální web — od návrhu přes vlastní WordPress téma až po sociální sítě, newsletter a digitální magazíny.',
-    coverImage: '/portfolio/Mockup.jpg',
-    coverAlt: 'Svět průmyslu — mockup webu',
+    coverImage: '/portfolio/svet_1.png',
+    coverAlt: 'Svět průmyslu — mobilní mockup webu',
+    coverMosaicLayout: 'screens',
+    coverMosaic: [
+      {
+        src: '/portfolio/svet_2.png',
+        alt: 'Svět průmyslu — homepage',
+        label: 'Homepage',
+      },
+      {
+        src: '/portfolio/svet_1.png',
+        alt: 'Svět průmyslu — mobilní mockup',
+        label: 'Mobile',
+        previewCrop: true,
+      },
+      {
+        src: '/portfolio/svet_3.png',
+        alt: 'Svět průmyslu — Brands a digitální magazíny',
+        label: 'Brands',
+      },
+    ],
     year: '2023',
     services: ['UI/UX', 'Web', 'Obsah', 'Sociální sítě', 'Newsletter'],
     liveUrl: 'https://www.svetprumyslu.cz',
@@ -255,8 +289,6 @@ export const caseStudies: CaseStudy[] = [
           'Začali jsme od nuly: nový design a celá UI/UX struktura webu — hierarchie informací, navigace, šablony článků i mobilní čitelnost. Návrh jsme postavili na WordPressu jako vlastní (custom) téma, aby redakce mohla web snadno spravovat a rozšiřovat.',
           'Paralelně jsme web podporovali na Facebooku a LinkedInu, spustili newsletter a navrhli digitální magazíny. Další čísla magazínu jsme pak předali grafickému designerovi — drželi jsme vizuální směr, zbytek produkce delegovali.',
         ],
-        image: '/portfolio/Mockup.jpg',
-        imageAlt: 'Svět průmyslu — detail návrhu webu',
       },
       {
         id: 'vysledek',
@@ -266,10 +298,6 @@ export const caseStudies: CaseStudy[] = [
           'Z webu s minimem návštěvníků se stala platforma, která ve špičce dosáhla až 10 000 návštěv týdně. Design, vývoj a obsahová podpora tak společně přinesly měřitelný skok v dosahu značky.',
         ],
       },
-    ],
-    gallery: [
-      { src: '/portfolio/Mockup.jpg', alt: 'Svět průmyslu — web mockup' },
-      { src: '/portfolio/casopis.jpg', alt: 'Svět průmyslu — digitální magazín' },
     ],
     results: [
       { label: 'Špička návštěvnosti', value: 'až 10 000 / týden' },
@@ -285,12 +313,36 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'fight-arena',
     client: 'Fight Arena',
-    title: 'UI design pro web3 crypto hru s energií arény',
+    title: 'UI design pro web3 crypto hru',
     kicker: 'Case study',
     lead:
       'Uživatelské rozhraní pro web3 crypto hru Fight Arena — ostrý, čitelný UI design, který drží tempo boje a zároveň funguje v kryptoprostředí.',
     coverImage: '/portfolio/Fight-arena.jpg',
     coverAlt: 'Fight Arena — UI design web3 hry',
+    coverMosaicLayout: 'screens',
+    coverMosaic: [
+      {
+        src: '/portfolio/Homepage.jpg',
+        alt: 'Fight Arena — homepage',
+        label: 'Homepage',
+        previewCrop: true,
+      },
+      { src: '/portfolio/Dashboard.png', alt: 'Fight Arena — dashboard', label: 'Dashboard' },
+      {
+        src: '/portfolio/Collection.jpg',
+        alt: 'Fight Arena — collection a deck building',
+        label: 'Collection',
+      },
+      { src: '/portfolio/Quests.jpg', alt: 'Fight Arena — quests', label: 'Quests' },
+      {
+        src: '/portfolio/Leaderboard.jpg',
+        alt: 'Fight Arena — leaderboard',
+        label: 'Leaderboard',
+      },
+      { src: '/portfolio/Shop.jpg', alt: 'Fight Arena — shop', label: 'Shop' },
+      { src: '/portfolio/Raffle.jpg', alt: 'Fight Arena — raffle', label: 'Raffle' },
+      { src: '/portfolio/Wheel.jpg', alt: 'Fight Arena — wheel', label: 'Wheel' },
+    ],
     year: '2024',
     services: ['UI Design', 'Web3'],
     liveUrl: 'https://onefightarena.com/',
@@ -317,8 +369,6 @@ export const caseStudies: CaseStudy[] = [
           'Součástí práce byl UI design herního rozhraní — hierarchie informací, stavy obrazovek, typografie a vizuální rytmus, který odpovídá tempu fight žánru.',
           'Každý prvek jsme stavěli tak, aby web3 kontext (wallet, crypto ekonomika, herní smyčky) byl přehledný, ne technicky odtažitý. Důraz byl na jasné CTA, čitelnost v akci a vizuál, který značku Fight Arena odliší.',
         ],
-        image: '/portfolio/Fight-arena.jpg',
-        imageAlt: 'Fight Arena — ukázka UI designu',
       },
       {
         id: 'vysledek',
@@ -329,7 +379,6 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
     ],
-    gallery: [{ src: '/portfolio/Fight-arena.jpg', alt: 'Fight Arena — UI design' }],
     results: [
       { label: 'Výstup', value: 'UI design' },
       { label: 'Segment', value: 'Web3 · crypto' },
