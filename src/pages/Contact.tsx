@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { contactPage, site } from '../data/maixner'
 
@@ -189,6 +190,10 @@ export function Contact() {
                             disabled={status === 'submitting'}
                           />
                         </label>
+                        <p className="contact-form__privacy">
+                          {contactPage.formPrivacy}{' '}
+                          <Link to="/ochrana-udaju">{contactPage.formPrivacyLink}</Link>.
+                        </p>
                         <button
                           type="submit"
                           className="btn btn-primary contact-form__submit"

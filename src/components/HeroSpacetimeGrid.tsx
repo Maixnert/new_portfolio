@@ -270,7 +270,6 @@ export function HeroSpacetimeGrid() {
 
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100)
     const camDir = new THREE.Vector3(4.6, 3.35, 5.2).normalize()
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setClearColor(0x000000, 0)
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -290,17 +289,19 @@ export function HeroSpacetimeGrid() {
     accentGlow.position.set(1.4, 2.2, 2.6)
     scene.add(amb, dir, planetGlow, accentGlow)
 
-    const seg = reduced ? 36 : 52
+    const seg = reduced ? 36 : coarsePointer ? 40 : 52
     const extent = 9.2
     const discR = (Math.min(extent, extent) * 0.5) * 0.97
     const planeW = extent
 
-    const shimmerMain = reduced ? 0 : 0.085
-    const multMain = reduced ? 0.085 : 0.12
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, coarsePointer ? 1.5 : 2))
+
+    const shimmerMain = reduced ? 0 : coarsePointer ? 0.12 : 0.085
+    const multMain = reduced ? 0.085 : coarsePointer ? 0.175 : 0.12
     const grid1 = buildSquareLineGrid(seg, extent, discR, multMain, palette, shimmerMain)
     scene.add(grid1.lines)
 
-    const enableSecondLayer = !reduced && !saveData
+    const enableSecondLayer = !reduced && !saveData && !coarsePointer
     const seg2 = Math.max(14, Math.floor(seg / 2))
     const mult2 = multMain * 0.42
     const shimmer2 = reduced || saveData ? 0 : 0.05
@@ -343,13 +344,15 @@ export function HeroSpacetimeGrid() {
     const gravVel = new THREE.Vector3(0, 0, 0)
 
     let pointerInside = false
-    let presence = 0
-    const wellK = reduced ? 0.55 : coarsePointer ? 1.2 : 1.05
-    const dipCap = reduced ? 0.45 : 1.05
-    const motionScale = reduced ? 0.32 : coarsePointer ? 0.88 : 1
+    let presence = coarsePointer ? 0.55 : 0
+    // Mobile: stronger, more obvious well so touch feedback is unmistakable
+    const wellK = reduced ? 0.55 : coarsePointer ? 1.55 : 1.05
+    const dipCap = reduced ? 0.45 : coarsePointer ? 1.25 : 1.05
+    const motionScale = reduced ? 0.32 : coarsePointer ? 1.15 : 1
+    const idlePresence = reduced ? 0 : coarsePointer ? 0.78 : 0
 
-    const springStiff = reduced ? 38 : coarsePointer ? 62 : 48
-    const springDamp = reduced ? 11.5 : coarsePointer ? 15 : 13
+    const springStiff = reduced ? 38 : coarsePointer ? 78 : 48
+    const springDamp = reduced ? 11.5 : coarsePointer ? 16 : 13
 
     const onMove = (e: PointerEvent) => {
       const cw = container.clientWidth
@@ -374,10 +377,29 @@ export function HeroSpacetimeGrid() {
     const onLeave = () => {
       pointerInside = false
     }
+    const onDown = (e: PointerEvent) => {
+      pointerInside = true
+      container.setPointerCapture?.(e.pointerId)
+      onMove(e)
+    }
+    const onUp = (e: PointerEvent) => {
+      // Keep active while finger is down; release restores idle orbit demo
+      if (e.type === 'pointercancel' || e.type === 'pointerup') {
+        pointerInside = false
+        try {
+          container.releasePointerCapture?.(e.pointerId)
+        } catch {
+          /* already released */
+        }
+      }
+    }
 
     container.addEventListener('pointermove', onMove)
     container.addEventListener('pointerenter', onEnter)
     container.addEventListener('pointerleave', onLeave)
+    container.addEventListener('pointerdown', onDown)
+    container.addEventListener('pointerup', onUp)
+    container.addEventListener('pointercancel', onUp)
 
     const gravityR0 = 0.42
     let raf = 0
@@ -415,10 +437,17 @@ export function HeroSpacetimeGrid() {
       const dt = Math.min(clock.getDelta(), 0.1)
       runTime += dt
 
-      const pLerp = reduced ? 2.5 : coarsePointer ? 6.5 : 5
-      presence += ((pointerInside ? 1 : 0) - presence) * Math.min(1, dt * pLerp)
+      const pLerp = reduced ? 2.5 : coarsePointer ? 7.5 : 5
+      const presenceTarget = pointerInside ? 1 : idlePresence
+      presence += (presenceTarget - presence) * Math.min(1, dt * pLerp)
       grid1.mat.uniforms.uPresence.value = presence
       if (grid2) grid2.mat.uniforms.uPresence.value = presence
+
+      // Idle demo on touch devices: slow orbit so people see the field is alive
+      if (!pointerInside && coarsePointer && !reduced) {
+        const orbitR = discR * 0.38
+        gravTarget.set(Math.sin(runTime * 0.7) * orbitR, 0, Math.cos(runTime * 0.7) * orbitR * 0.85)
+      }
 
       const err = new THREE.Vector3().subVectors(gravTarget, gravSmooth)
       const accel = err.multiplyScalar(springStiff).sub(gravVel.clone().multiplyScalar(springDamp))
@@ -465,7 +494,7 @@ export function HeroSpacetimeGrid() {
       const dipCenter = (-(wellK * presence * motionScale) / dist2c) * (planeW * 0.18)
       const yCenter = Math.max(dipCenter, -dipCap)
       planet.position.set(cx, yCenter + 0.19 * presence, cz)
-      planet.scale.setScalar(0.92 * presence)
+      planet.scale.setScalar((coarsePointer ? 1.05 : 0.92) * Math.max(presence, idlePresence * 0.85))
       planet.visible = presence > 0.02
 
       planetGlow.position.copy(planet.position)
@@ -484,6 +513,9 @@ export function HeroSpacetimeGrid() {
       container.removeEventListener('pointermove', onMove)
       container.removeEventListener('pointerenter', onEnter)
       container.removeEventListener('pointerleave', onLeave)
+      container.removeEventListener('pointerdown', onDown)
+      container.removeEventListener('pointerup', onUp)
+      container.removeEventListener('pointercancel', onUp)
       const canvas = renderer.domElement
       if (canvas.parentNode === container) {
         container.removeChild(canvas)
@@ -501,7 +533,7 @@ export function HeroSpacetimeGrid() {
   }, [])
 
   return (
-    <div className="hero-orb hero-orb--interactive" ref={containerRef} aria-hidden>
+    <div className="hero-orb hero-orb--interactive" ref={containerRef}>
       {/* canvas injected here */}
     </div>
   )

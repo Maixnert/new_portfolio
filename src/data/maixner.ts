@@ -64,13 +64,26 @@ export const hero = {
   /** Dva řádky pro stagger (nadpis) */
   words: [
     { text: 'Dáme vašemu byznysu gravitaci,', delay: 0 },
-    { text: 'která přitahuje nové klienty.', delay: 90 },
+    { text: 'která přitahuje nové klienty', delay: 90 },
   ] as const,
   subhead: '',
   body: 'Massflow propojuje strategii, design a obsah tak, aby váš byznys nepotřeboval hledat klienty, s naší pomocí přijdou sami.',
-  ctaPrimary: 'Ukázat práci',
-  ctaSecondary: 'Napište mi',
+  ctaPrimary: 'Domluvme si další krok',
+  ctaSecondary: 'Ukázat práci',
 }
+
+/** Jednotné CTA napříč webem */
+export const ctas = {
+  primary: 'Domluvme si další krok',
+  consult: 'Nezávazná konzultace zdarma',
+  secondary: 'Ukázat práci',
+  nav: 'Konzultace',
+  stripKicker: 'Další krok',
+  stripLead:
+    'Nezávazná konzultace zdarma — řeknete nám záměr a společně navrhneme nejlepší další postup.',
+  homeCloseKicker: 'Připraveni růst?',
+  homeCloseLead: 'Od strategie po web a kampaně — domluvme si krátký call bez závazků.',
+} as const
 
 export const homeServices = [
   {
@@ -121,6 +134,9 @@ export const homeSections = {
   servicesKicker: 'CO UMÍME',
   servicesTitle: 'Služby, které mluví za vás',
   servicesCta: 'Zobrazit všechny služby',
+  casesKicker: 'CASE STUDY',
+  casesTitle: 'Projekty s měřitelným dopadem',
+  casesCta: 'Všechny projekty',
   processKicker: 'JAK TO CHODÍ',
   processTitle: 'Spolupráce bez zbytečných komplikací',
 }
@@ -148,7 +164,7 @@ export const about = {
     'Rozhodujeme se podle dat i praxe.',
     'Myslíme dlouhodobě, ne jen na jednorázové odevzdání.',
   ],
-  cta: 'Pojďme spolupracovat',
+  cta: 'Domluvme si další krok',
 }
 
 export type PortfolioCategory = 'vše' | 'web' | 'design' | 'kampaně' | 'video'
@@ -161,6 +177,174 @@ export type PortfolioItem = {
   alsoIn?: Exclude<PortfolioCategory, 'vše'>[]
   href?: string
   external?: boolean
+  /** Pokud je nastaveno, dlaždice vede na case study `/prace/:slug` */
+  caseStudySlug?: string
+}
+
+export type CaseStudySection = {
+  id: string
+  heading: string
+  body: string[]
+  image?: string
+  imageAlt?: string
+}
+
+export type CaseStudy = {
+  slug: string
+  client: string
+  title: string
+  kicker: string
+  lead: string
+  coverImage: string
+  coverAlt: string
+  year: string
+  services: string[]
+  liveUrl?: string
+  liveLabel?: string
+  meta: { label: string; value: string }[]
+  sections: CaseStudySection[]
+  gallery?: { src: string; alt: string }[]
+  results?: { label: string; value: string }[]
+  seo: PageMeta
+}
+
+export const caseStudyUi = {
+  back: 'Zpět na projekty',
+  liveProject: 'Otevřít projekt',
+  overviewKicker: 'Přehled',
+  resultsHeading: 'Co přinesla spolupráce',
+  galleryHeading: 'Ukázky z projektu',
+  ctaText:
+    'Chcete podobný výsledek pro svou značku? Domluvme si krátkou konzultaci.',
+} as const
+
+/** Case studies — upravte texty a doplňte obrázky. Nový case study = nový záznam + caseStudySlug u portfolioItems. */
+export const caseStudies: CaseStudy[] = [
+  {
+    slug: 'svet-prumyslu',
+    client: 'Svět průmyslu',
+    title: 'Od málo navštěvovaného webu k mediální platformě s tisíci čtenáři',
+    kicker: 'Case study',
+    lead:
+      'Kompletní redesign a UI/UX struktura pro průmyslový mediální web — od návrhu přes vlastní WordPress téma až po sociální sítě, newsletter a digitální magazíny.',
+    coverImage: '/portfolio/Mockup.jpg',
+    coverAlt: 'Svět průmyslu — mockup webu',
+    year: '2023',
+    services: ['UI/UX', 'Web', 'Obsah', 'Sociální sítě', 'Newsletter'],
+    liveUrl: 'https://www.svetprumyslu.cz',
+    liveLabel: 'svetprumyslu.cz',
+    meta: [
+      { label: 'Klient', value: 'Svět průmyslu' },
+      { label: 'Rok', value: '2023' },
+      { label: 'Role', value: 'UI/UX · Web · Obsah' },
+      { label: 'Stack', value: 'WordPress · custom theme' },
+    ],
+    sections: [
+      {
+        id: 'vyzva',
+        heading: 'Výzva',
+        body: [
+          'Původní web Světa průmyslu měl jen minimum návštěvníků a neplnil roli mediální značky. Chyběla jasná struktura, moderní prezentace obsahu i kanály, které by čtenáře dlouhodobě přiváděly zpět — od sociálních sítí po newsletter a magazín.',
+          'Cílem bylo postavit digitální domov, který průmyslové publikum snadno čte a sdílí, a kolem něj obsahový ekosystém připravený na růst.',
+        ],
+      },
+      {
+        id: 'pristup',
+        heading: 'Přístup',
+        body: [
+          'Začali jsme od nuly: nový design a celá UI/UX struktura webu — hierarchie informací, navigace, šablony článků i mobilní čitelnost. Návrh jsme postavili na WordPressu jako vlastní (custom) téma, aby redakce mohla web snadno spravovat a rozšiřovat.',
+          'Paralelně jsme web podporovali na Facebooku a LinkedInu, spustili newsletter a navrhli digitální magazíny. Další čísla magazínu jsme pak předali grafickému designerovi — drželi jsme vizuální směr, zbytek produkce delegovali.',
+        ],
+        image: '/portfolio/Mockup.jpg',
+        imageAlt: 'Svět průmyslu — detail návrhu webu',
+      },
+      {
+        id: 'vysledek',
+        heading: 'Řešení',
+        body: [
+          'Výsledkem je moderní mediální web na vlastním WordPress tématu a kolem něj fungující obsahový ekosystém — Facebook, LinkedIn, newsletter a digitální magazíny.',
+          'Z webu s minimem návštěvníků se stala platforma, která ve špičce dosáhla až 10 000 návštěv týdně. Design, vývoj a obsahová podpora tak společně přinesly měřitelný skok v dosahu značky.',
+        ],
+      },
+    ],
+    gallery: [
+      { src: '/portfolio/Mockup.jpg', alt: 'Svět průmyslu — web mockup' },
+      { src: '/portfolio/casopis.jpg', alt: 'Svět průmyslu — digitální magazín' },
+    ],
+    results: [
+      { label: 'Špička návštěvnosti', value: 'až 10 000 / týden' },
+      { label: 'Předtím', value: 'Minimum návštěv' },
+      { label: 'Rozsah', value: 'Web · SMM · magazín · newsletter' },
+    ],
+    seo: {
+      title: 'Svět průmyslu — case study | Massflow',
+      description:
+        'Case study Massflow: redesign a UI/UX webu Svět průmyslu na vlastním WordPress tématu. Až 10 000 návštěv týdně — včetně Facebooku, LinkedInu, newsletteru a digitálních magazínů.',
+    },
+  },
+  {
+    slug: 'fight-arena',
+    client: 'Fight Arena',
+    title: 'UI design pro web3 crypto hru s energií arény',
+    kicker: 'Case study',
+    lead:
+      'Uživatelské rozhraní pro web3 crypto hru Fight Arena — ostrý, čitelný UI design, který drží tempo boje a zároveň funguje v kryptoprostředí.',
+    coverImage: '/portfolio/Fight-arena.jpg',
+    coverAlt: 'Fight Arena — UI design web3 hry',
+    year: '2024',
+    services: ['UI Design', 'Web3'],
+    liveUrl: 'https://onefightarena.com/',
+    liveLabel: 'onefightarena.com',
+    meta: [
+      { label: 'Klient', value: 'Fight Arena' },
+      { label: 'Rok', value: '2024' },
+      { label: 'Role', value: 'UI Design' },
+      { label: 'Typ', value: 'Web3 · crypto hra' },
+    ],
+    sections: [
+      {
+        id: 'vyzva',
+        heading: 'Výzva',
+        body: [
+          'Fight Arena potřebovala UI, které unese svět web3 crypto hry: souboje, progres, on-chain logiku i atmosféru arény. Rozhraní muselo působit ostře a atraktivně — a zároveň zůstat srozumitelné hráčům, kteří se v kryptu pohybují různě dlouho.',
+          'Cílem bylo navrhnout vizuální a interakční vrstvu, která prodá energii hry, nezahlíí detaily a drží konzistenci napříč klíčovými obrazovkami.',
+        ],
+      },
+      {
+        id: 'pristup',
+        heading: 'Přístup',
+        body: [
+          'Součástí práce byl UI design herního rozhraní — hierarchie informací, stavy obrazovek, typografie a vizuální rytmus, který odpovídá tempu fight žánru.',
+          'Každý prvek jsme stavěli tak, aby web3 kontext (wallet, crypto ekonomika, herní smyčky) byl přehledný, ne technicky odtažitý. Důraz byl na jasné CTA, čitelnost v akci a vizuál, který značku Fight Arena odliší.',
+        ],
+        image: '/portfolio/Fight-arena.jpg',
+        imageAlt: 'Fight Arena — ukázka UI designu',
+      },
+      {
+        id: 'vysledek',
+        heading: 'Řešení',
+        body: [
+          'Výsledkem je UI design pro web3 crypto hru, který spojuje atmosféru arény s praktickou použitelností. Hráč se v rozhraní rychle zorientuje, značka působí silně a připraveně na digitální bojové prostředí.',
+          'Hotový vizuál a struktura obrazovek tvoří základ herního zážitku Fight Arena — od prvního dojmu po klíčové herní stavy.',
+        ],
+      },
+    ],
+    gallery: [{ src: '/portfolio/Fight-arena.jpg', alt: 'Fight Arena — UI design' }],
+    results: [
+      { label: 'Výstup', value: 'UI design' },
+      { label: 'Segment', value: 'Web3 · crypto' },
+      { label: 'Produkt', value: 'Herní rozhraní' },
+    ],
+    seo: {
+      title: 'Fight Arena — case study | Massflow',
+      description:
+        'Case study Massflow: UI design pro web3 crypto hru Fight Arena. Ostré herní rozhraní s energií arény.',
+    },
+  },
+]
+
+export function getCaseStudy(slug: string): CaseStudy | undefined {
+  return caseStudies.find((c) => c.slug === slug)
 }
 
 /** Obrázky práce: vložte do public/portfolio/ (včetně semin.jpg, profifix.jpg, fight-arena.jpg). */
@@ -171,22 +355,23 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: '1',
     title: 'Smarty · e-commerce',
-    image: '/portfolio/SET-1920x1080.png',
+    image: '/portfolio/SET-1920x1080.jpg',
     category: 'web',
   },
   {
     id: '2',
     title: 'Bedtime Stories',
-    image: '/portfolio/SceneBedtime-stories.png',
+    image: '/portfolio/SceneBedtime-stories.jpg',
     category: 'design',
   },
   {
     id: '3',
     title: 'Svět průmyslu',
-    image: '/portfolio/Mockup.png',
+    image: '/portfolio/Mockup.jpg',
     category: 'web',
     href: 'https://www.svetprumyslu.cz',
     external: true,
+    caseStudySlug: 'svet-prumyslu',
   },
   {
     id: '4',
@@ -214,6 +399,7 @@ export const portfolioItems: PortfolioItem[] = [
     image: '/portfolio/Fight-arena.jpg',
     category: 'design',
     href: 'https://onefightarena.com/',
+    caseStudySlug: 'fight-arena',
   },
   {
     id: '8',
@@ -243,7 +429,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     id: '11',
     title: 'Oktagon',
-    image: '/portfolio/NEW_OKTAGON.png',
+    image: '/portfolio/NEW_OKTAGON.jpg',
     category: 'design',
   },
 ]
@@ -253,6 +439,7 @@ export const servicesPage = {
   title: 'Služby, které nabízíme',
   intro:
     'Máme široké zkušenosti z tvorby obsahu, web designu, vývoje, správy webů i digitálního marketingu — a držíme je v jednom proudu pro vaše projekty.',
+  cta: 'Nezávazná konzultace zdarma',
   rows: [
     {
       num: '01',
@@ -291,6 +478,9 @@ export const contactPage = {
   formSubmitting: 'Odesílám…',
   formSuccess: 'Vaše zpráva byla úspěšně odeslána.',
   formError: 'Odeslání se nezdařilo. Zkuste to znovu nebo nás kontaktujte přímo e-mailem či WhatsApp.',
+  formPrivacy:
+    'Odesláním souhlasíte se zpracováním údajů z formuláře za účelem vyřízení poptávky. Podrobnosti v',
+  formPrivacyLink: 'Zásadách ochrany osobních údajů',
   sendMessage: 'Otevřít',
 }
 
@@ -315,10 +505,22 @@ export const pageMetaByPath = {
     title: 'Kontakt — Massflow | Šumperk, Olomouc',
     description: `${contactPage.lead} E-mail, Messenger, WhatsApp.`,
   },
+  '/ochrana-udaju': {
+    title: 'Zásady ochrany osobních údajů | Massflow',
+    description:
+      'Informace o zpracování osobních údajů, cookies a Google Analytics podle GDPR — Massflow / Tomáš Maixner.',
+  },
 } as const satisfies Record<string, PageMeta>
 
 export function getPageMeta(pathname: string): PageMeta {
   const known = pageMetaByPath[pathname as keyof typeof pageMetaByPath]
   if (known) return known
+
+  const caseMatch = pathname.match(/^\/prace\/([^/]+)$/)
+  if (caseMatch) {
+    const study = getCaseStudy(caseMatch[1])
+    if (study) return study.seo
+  }
+
   return notFoundPageMeta
 }

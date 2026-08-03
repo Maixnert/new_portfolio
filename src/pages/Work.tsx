@@ -1,7 +1,10 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { CtaStrip } from '../components/CtaStrip'
 import { Reveal } from '../components/Reveal'
 import {
   type PortfolioCategory,
+  ctas,
   portfolioIntro,
   portfolioItems,
 } from '../data/maixner'
@@ -127,26 +130,46 @@ export function Work() {
                 </>
               )
 
+              const tileClass = `work-tile${featured ? ' work-tile--feature' : ''}`
+
               return (
                 <Reveal key={item.id} delayMs={index * 50}>
-                  <button
-                    type="button"
-                    className={`work-tile work-tile--button${featured ? ' work-tile--feature' : ''}`}
-                    onClick={() =>
-                      setLightbox({
-                        src: item.image,
-                        title: item.title,
-                        ...(item.href ? { href: item.href } : {}),
-                      })
-                    }
-                  >
-                    {inner}
-                  </button>
+                  {item.caseStudySlug ? (
+                    <Link
+                      to={`/prace/${item.caseStudySlug}`}
+                      className={`${tileClass} work-tile--link`}
+                    >
+                      {inner}
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      className={`${tileClass} work-tile--button`}
+                      onClick={() =>
+                        setLightbox({
+                          src: item.image,
+                          title: item.title,
+                          ...(item.href ? { href: item.href } : {}),
+                        })
+                      }
+                    >
+                      {inner}
+                    </button>
+                  )}
                 </Reveal>
               )
             })}
           </div>
         </section>
+
+        <Reveal delayMs={80}>
+          <div className="section-cta">
+            <CtaStrip
+              text="Líbí se vám naše práce? Domluvme si krátkou konzultaci a najdeme řešení pro váš projekt."
+              primaryLabel={ctas.primary}
+            />
+          </div>
+        </Reveal>
       </div>
 
       {lightbox && (
@@ -199,6 +222,8 @@ function PortfolioTileImage({ src, title }: { src: string; title: string }) {
       alt={`${title} — ukázka projektu`}
       loading="lazy"
       decoding="async"
+      width={960}
+      height={640}
       onError={() => setFailed(true)}
     />
   )

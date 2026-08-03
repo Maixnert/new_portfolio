@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { CtaStrip } from '../components/CtaStrip'
 import { Reveal } from '../components/Reveal'
-import { servicesPage } from '../data/maixner'
+import { ctas, servicesPage } from '../data/maixner'
 
 export function Services() {
   const [open, setOpen] = useState<number | null>(0)
@@ -48,6 +49,12 @@ export function Services() {
             )
           })}
         </div>
+
+        <Reveal delayMs={80}>
+          <div className="section-cta">
+            <CtaStrip primaryLabel={servicesPage.cta} text={ctas.stripLead} />
+          </div>
+        </Reveal>
       </div>
     </div>
   )

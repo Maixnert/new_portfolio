@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
+import { CtaStrip } from '../components/CtaStrip'
 import { Reveal } from '../components/Reveal'
-import { about } from '../data/maixner'
+import { about, ctas } from '../data/maixner'
 
 export function About() {
   return (
@@ -73,7 +74,11 @@ export function About() {
             </div>
           </Reveal>
 
-        
+          <Reveal delayMs={120}>
+            <div className="section-cta">
+              <CtaStrip primaryLabel={about.cta} text={ctas.stripLead} />
+            </div>
+          </Reveal>
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
+import { CookieConsent, openCookieSettings } from './CookieConsent'
 import { CustomCursor } from './CustomCursor'
 import { SiteMeta } from './SiteMeta'
-import { assetPaths, footerTagline, site } from '../data/maixner'
+import { assetPaths, ctas, footerTagline, site } from '../data/maixner'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   `nav-link${isActive ? ' active' : ''}`
@@ -46,9 +47,26 @@ export function Layout() {
   }, [menuOpen])
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    if (!menuOpen) {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      return
+    }
+
+    const scrollY = window.scrollY
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
+
     return () => {
       document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      window.scrollTo(0, scrollY)
     }
   }, [menuOpen])
 
@@ -66,7 +84,9 @@ export function Layout() {
   }, [mobileNavMq, menuOpen])
 
   return (
-    <div className="site-shell">
+    <div
+      className={`site-shell${pathname === '/' ? ' site-shell--home' : ''}${menuOpen ? ' site-shell--menu-open' : ''}`}
+    >
       <SiteMeta />
       <a href="#main" className="skip-link">
         Přeskočit na obsah
@@ -89,7 +109,10 @@ export function Layout() {
                 src={assetPaths.logo}
                 alt={site.name}
                 className="brand-mark__img"
+                width={120}
+                height={33}
                 decoding="async"
+                fetchPriority="high"
                 onError={() => setLogoOk(false)}
               />
             ) : (
@@ -137,7 +160,7 @@ export function Layout() {
                 className={({ isActive }) => `nav-cta${isActive ? ' active' : ''}`}
                 onClick={closeMenu}
               >
-                Kontakt
+                {ctas.nav}
               </NavLink>
             </nav>
           </div>
@@ -147,6 +170,14 @@ export function Layout() {
       <main id="main" className="site-main" tabIndex={-1}>
         <Outlet />
       </main>
+
+      {pathname !== '/kontakt' && !menuOpen ? (
+        <div className="mobile-cta-bar" role="region" aria-label="Rychlá konzultace">
+          <NavLink to="/kontakt" className="btn btn-primary mobile-cta-bar__btn" onClick={closeMenu}>
+            {ctas.consult}
+          </NavLink>
+        </div>
+      ) : null}
 
       <footer className="site-footer">
         <div
@@ -163,6 +194,15 @@ export function Layout() {
             </p>
             <p className="site-footer__meta">
               &copy; {new Date().getFullYear()} {site.name}
+            </p>
+            <p className="site-footer__legal">
+              <Link to="/ochrana-udaju">Ochrana osobních údajů</Link>
+              <span className="site-footer__legal-sep" aria-hidden>
+                ·
+              </span>
+              <button type="button" className="site-footer__cookie-btn" onClick={openCookieSettings}>
+                Nastavení cookies
+              </button>
             </p>
           </div>
           {site.showFooterSocial ? (
@@ -192,6 +232,7 @@ export function Layout() {
           ) : null}
         </div>
       </footer>
+      <CookieConsent />
       <CustomCursor />
     </div>
   )
