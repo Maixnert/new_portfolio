@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import {
+  facebookAppId,
   getPageMeta,
   site,
   siteOrigin,
@@ -67,6 +68,7 @@ export function SiteMeta() {
       <meta property="og:image:width" content={String(socialShareImageWidth)} />
       <meta property="og:image:height" content={String(socialShareImageHeight)} />
       <meta property="og:image:type" content="image/jpeg" />
+      <meta property="fb:app_id" content={facebookAppId} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />

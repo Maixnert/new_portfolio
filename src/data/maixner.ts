@@ -34,9 +34,11 @@ export const site = {
 export const siteOrigin = `https://${site.domain}` as const
 
 /** Obrázek pro sdílení (og:image, Twitter) — public/thumbnail.jpg */
-export const socialShareImagePath = '/thumbnail.jpg'
-export const socialShareImageWidth = 1912
-export const socialShareImageHeight = 1107
+export const socialShareImagePath = '/thumbnail.jpg?v=20260811'
+export const socialShareImageWidth = 1200
+export const socialShareImageHeight = 669
+/** Facebook default App ID — clears Sharing Debugger “missing fb:app_id” warning */
+export const facebookAppId = '966242223397117'
 
 export type PageMeta = {
   title: string
